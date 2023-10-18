@@ -17,6 +17,7 @@ public static class Products
     public static List<Product> productList = new List<Product>();
 
     static Products()
+
     {
         ReadProducts();
     }
