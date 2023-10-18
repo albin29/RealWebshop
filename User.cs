@@ -10,7 +10,7 @@ namespace Webshop;
 public class User
 {
     // important stuff
-   // ViewHistory viewHistory = new ViewHistory();
+    History history = new History();
     string? realusername;
     public Dictionary<string, string> loginlistUser = new Dictionary<string, string>();
     List<Product> shoppingList = new List<Product>();
@@ -133,7 +133,7 @@ public class User
                 Console.Clear();
                 Console.WriteLine(realusername + " Buyhistory:\n");
 
-                //viewHistory.ViewBuyHistory(realusername);
+                history.ViewBuyHistory(realusername);
 
                 Console.ReadKey();
                 Console.Clear();
@@ -144,7 +144,7 @@ public class User
                 Console.WriteLine("Cart contains: \n");
                 for (int i = 0; i < shoppingList.Count; i++)
                 {
-                   Console.WriteLine(shoppingList[i].name + " " + shoppingList[i].price);
+                    Console.WriteLine(shoppingList[i].name + " " + shoppingList[i].price);
                 }
                 Console.ReadKey();
                 Console.Clear();
