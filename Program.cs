@@ -9,7 +9,7 @@ public class Program
     {
         // Gets admin and user functions to use in main
         //Admin admin = new Admin();
-        //User user = new User();
+        User user = new User();
 
         while (true)
         {
@@ -29,12 +29,12 @@ public class Program
             else if (choice == "2")
             {
 
-            //    User.Login();
+                user.Login();
                 continue;
             }
             else if (choice == "3")
             {
-              //  User.();
+                user.RegisterUser();
                 continue;
             }
             else if (choice == "4")
