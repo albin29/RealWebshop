@@ -23,18 +23,18 @@ internal class Program
 
             if (choice == "1")
             {
-          //      admin.AdminMenu();
+          //      Admin.AdminMenu();
                 continue;
             }
             else if (choice == "2")
             {
 
-            //    user.Login();
+            //    User.Login();
                 continue;
             }
             else if (choice == "3")
             {
-              //  user.RegisterUser();
+              //  User.();
                 continue;
             }
             else if (choice == "4")
