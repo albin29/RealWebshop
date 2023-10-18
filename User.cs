@@ -126,7 +126,7 @@ public class User
             if (userChoice == "1")
             {
                 Console.Clear();
-                //Products.ShopItems(shoppingList);
+                Products.ShopItems(shoppingList);
             }
             else if (userChoice == "2")
             {
