@@ -8,4 +8,12 @@ namespace Webshop;
 
 public class Product
 {
+    public readonly string Name;
+    public readonly int Price;
+
+    public Product (string name, int price)
+    {
+        Name = name;
+        Price = price;
+    }
 }
