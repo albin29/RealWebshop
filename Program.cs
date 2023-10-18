@@ -7,9 +7,12 @@ public class Program
 
     static void Main(string[] args)
     {
+        
         // Gets admin and user functions to use in main
         //Admin admin = new Admin();
         User user = new User();
+        Admin admin = new Admin();
+        user.Init();
 
         while (true)
         {
@@ -23,7 +26,7 @@ public class Program
 
             if (choice == "1")
             {
-          //      Admin.AdminMenu();
+                admin.AdminMenu();
                 continue;
             }
             else if (choice == "2")
