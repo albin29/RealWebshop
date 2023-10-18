@@ -8,6 +8,7 @@ namespace Webshop;
 
 public class Product
 {
+
     public struct ProductStructure
     {
         public float price;
