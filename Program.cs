@@ -2,7 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 
 namespace Webshop;
-internal class Program
+public class Program
 {
 
     static void Main(string[] args)
