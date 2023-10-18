@@ -144,7 +144,7 @@ public class User
                 Console.WriteLine("Cart contains: \n");
                 for (int i = 0; i < shoppingList.Count; i++)
                 {
-                   // Console.WriteLine(shoppingList[i].name + " " + shoppingList[i].price);
+                   Console.WriteLine(shoppingList[i].name + " " + shoppingList[i].price);
                 }
                 Console.ReadKey();
                 Console.Clear();
@@ -156,13 +156,13 @@ public class User
                 {
                     for (int i = 0; i < shoppingList.Count; i++)
                     {
-                     //   totalAmount += shoppingList[i].price;
-                        //sw.WriteLine(realusername + ";" + shoppingList[i].name + ";" + shoppingList[i].price + ";" + DateTime.Now.ToString());
+                        totalAmount += shoppingList[i].price;
+                        sw.WriteLine(realusername + ";" + shoppingList[i].name + ";" + shoppingList[i].price + ";" + DateTime.Now.ToString());
                     }
                 }
                 Console.Clear();
                 Console.WriteLine("Your purchase was successful! Total amount paid: " + totalAmount + "$");
-                break;
+                continue;
             }
             else
             {
