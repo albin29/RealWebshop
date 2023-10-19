@@ -12,7 +12,7 @@ public class Program
         //Admin admin = new Admin();
         User user = new User();
         Admin admin = new Admin();
-        user.Init();
+      //  user.Init();
 
         while (true)
         {

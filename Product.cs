@@ -6,44 +6,36 @@ using System.Threading.Tasks;
 
 namespace Webshop;
 
-public struct Product
-{
-    public float price;
-    public string name;
-}
-
+public record Product(
+     float Price,
+     string Name
+);
 public static class Products
 {
     public static List<Product> productList = new List<Product>();
-
     static Products()
-
     {
         ReadProducts();
     }
-
     public static void RegisterProduct(Product product)
     {
         productList.Add(product);
         WriteProducts();
     }
-
     public static void UnregisterProduct(Product product)
     {
         productList.Remove(product);
         WriteProducts();
     }
-
     private static void WriteProducts()
     {
         string lines = "";
         foreach (var product in productList)
         {
-            lines += product.name + ";" + product.price.ToString() + "\n";
+            lines += product.Name + ";" + product.Price + "\n";
         }
         File.WriteAllText("../../../products.csv", lines);
     }
-
     public static void ReadProducts()
     {
         string[] filen = File.ReadAllLines("../../../products.csv");
@@ -59,11 +51,10 @@ public static class Products
             productname = filen[0];
             string productprice = filen[1];
             productList.Add(new Product
-            {
-                price = float.Parse(productprice),
-                name = productname
-            });
-
+            (
+                float.Parse(productprice),
+                productname
+            ));
         }
     }
 
@@ -75,8 +66,7 @@ public static class Products
 
             for (int i = 0; i < productList.Count; i++)
             {
-                Console.WriteLine(productList[i].name + " kostar" + " " + productList[i].price + " SEK ");
-
+                Console.WriteLine(productList[i].Name + " kostar" + " " + productList[i].Price + " SEK ");
             }
             Console.WriteLine();
             Console.WriteLine("Press 0 to go back to menu");
@@ -85,18 +75,16 @@ public static class Products
             bool validitem = false;
             for (int i = 0; i < productList.Count; i++)
             {
-
-                if (userpick == productList[i].name)
+                if (userpick == productList[i].Name)
                 {
                     Console.Clear();
-                    Console.WriteLine("You picked " + productList[i].name);
+                    Console.WriteLine("You picked " + productList[i].Name);
                     Console.WriteLine("Press enter to proceed");
                     Console.ReadKey();
                     Console.Clear();
                     validitem = true;
                     shoppinglist.Add(productList[i]);
                     continue;
-
                 }
             }
             if (userpick == "0")
@@ -115,4 +103,3 @@ public static class Products
         }
     }
 }
-
