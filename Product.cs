@@ -17,6 +17,7 @@ public static class Products
     {
         ReadProducts();
     }
+  
     public static void RegisterProduct(Product product)
     {
         productList.Add(product);

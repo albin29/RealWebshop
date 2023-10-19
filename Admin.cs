@@ -8,6 +8,7 @@ using System.IO;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Diagnostics;
 using Microsoft.Win32;
+using System.Xml.Linq;
 
 namespace Webshop;
 
@@ -183,6 +184,10 @@ public class Admin
     }//some code missing!
     private void AddProduct()
     {
+        
+        
+        
+
         Console.Clear();
         Console.WriteLine("Add a new product");
         Console.WriteLine("Product List"); //Productlist display
@@ -191,8 +196,13 @@ public class Admin
 
         Console.WriteLine("Please enter a product price in SEK per unit: ");
         string? productPrice = Console.ReadLine();
+        Product product = new Product(float.Parse(productPrice), productName);
+
+        float price = product.Price;
+        string name = product.Name;
         while (true)
         {
+            Products.RegisterProduct(product);
             Console.Clear();
             Console.WriteLine("You successfully added " + productName + " at " + productPrice + " SEK per unit to your product list.");
 
