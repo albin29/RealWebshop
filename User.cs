@@ -28,7 +28,7 @@ public class User
     // Function for registering a new user
     public bool RegisterUser()
     {
-        Init();
+        
 
         string? passwordinput;
         while (true)
@@ -86,7 +86,7 @@ public class User
     // Login function for user
     public bool Login()
     {
-        Init();
+        
 
         while (true)
         {
@@ -122,6 +122,7 @@ public class User
             Console.WriteLine("2 / View purchase history");
             Console.WriteLine("3 / View cart");
             Console.WriteLine("4 / Checkout");
+            Console.WriteLine("5 / Exit");
             string userChoice = Console.ReadLine();
             if (userChoice == "1")
             {
@@ -163,6 +164,10 @@ public class User
                 Console.Clear();
                 Console.WriteLine("Your purchase was successful! Total amount paid: " + totalAmount + "$");
                 continue;
+            }
+            else if (userChoice=="5") {
+
+                break;
             }
             else
             {
