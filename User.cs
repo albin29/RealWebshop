@@ -67,7 +67,7 @@ public class User
     }
 
     // Dictionary csv for user login and password
-    public void Init()
+    public User()
     {
         string[] filen = File.ReadAllLines("../../../users.csv");
 
@@ -145,7 +145,7 @@ public class User
                 Console.WriteLine("Cart contains: \n");
                 for (int i = 0; i < shoppingList.Count; i++)
                 {
-                    Console.WriteLine(shoppingList[i].name + " " + shoppingList[i].price);
+                    Console.WriteLine(shoppingList[i].Name + " " + shoppingList[i].Price);
                 }
                 Console.ReadKey();
                 Console.Clear();
@@ -157,8 +157,8 @@ public class User
                 {
                     for (int i = 0; i < shoppingList.Count; i++)
                     {
-                        totalAmount += shoppingList[i].price;
-                        sw.WriteLine(realusername + ";" + shoppingList[i].name + ";" + shoppingList[i].price + ";" + DateTime.Now.ToString());
+                        totalAmount += shoppingList[i].Price;
+                        sw.WriteLine(realusername + ";" + shoppingList[i].Name + ";" + shoppingList[i].Price + ";" + DateTime.Now.ToString());
                     }
                 }
                 Console.Clear();

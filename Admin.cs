@@ -17,12 +17,10 @@ public class Admin
     string adminpassword = "123";
 
     User user = new User();
-
     public void AdminMenu()
     {
 
         Console.WriteLine("Admin Login");
-
 
         while (true)
         {
@@ -31,12 +29,9 @@ public class Admin
 
             if (enteredpassword == adminpassword)
             {
-                {
-                    AdminMainMenu();
-                }
+                AdminMainMenu();
                 break;
             }
-
             else
             {
                 Console.WriteLine("The password was wrong");
@@ -48,55 +43,42 @@ public class Admin
     {
         while (true)
         {
-
             Console.Clear();
             Console.WriteLine("Hello, Admin! What would you like to do?");
-        
+
             Console.WriteLine("1 - to manage products.");
             Console.WriteLine("2 - to manage users.");
             Console.WriteLine("3 - to view order and transaction history.");
             Console.WriteLine("x - to log out.");
-            
+
             Console.Write("Please navigate by entering the preceding character: ");
             string? menuselection = Console.ReadLine();
 
             if (menuselection == "1")
             {
-                {
-                    ProductMenu();
-                }
+                ProductMenu();
                 break;
             }
-
             else if (menuselection == "2")
             {
-                {
-                    UserMenu();
-                }
+                UserMenu();
                 break;
             }
-
             else if (menuselection == "3")
             {
-                {
-                    DisplayBuyHistory();
-                }
+                DisplayBuyHistory();
                 break;
             }
-
             else if (menuselection == "x")
             {
-
                 break;
                 //AdminMenu();
-
-
             }
             else
             {
                 Console.Clear();
                 Console.WriteLine("Invalid entry.");
-                
+
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
                 continue;
@@ -116,64 +98,49 @@ public class Admin
             Console.WriteLine("3 - to delete a product.");
             Console.WriteLine("m - to go back to your main menu.");
             Console.WriteLine("x - to log out.");
-           
-            Console.Write("Please navigate by entering the preceding character: ");
+
+            Console.Write("Please navigate by entering the proceeding character: ");
+
             string? menuselection = Console.ReadLine();
 
             if (menuselection == "1")
             {
-                {
-                    AddProduct();
-                }
+                AddProduct();
                 break;
             }
-
             else if (menuselection == "2")
             {
-                {
-                    EditProduct();
-                }
+                EditProduct();
                 break;
             }
 
             else if (menuselection == "3")
-
             {
-                {
-                    DeleteProduct();
-                }
+                DeleteProduct();
                 break;
             }
 
 
             else if (menuselection == "m")
             {
-                {
-                    AdminMainMenu();
-                }
+                AdminMainMenu();
                 break;
             }
-
             else if (menuselection == "x")
             {
-                {
-
-                    //AdminMenu();
-                }
+                //AdminMenu();
             }
-
             else
             {
                 Console.Clear();
                 Console.WriteLine("Invalid entry.");
-                
+
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
                 continue;
             }
         }
     }
-
     public void EditProduct()
 
     {
@@ -181,7 +148,7 @@ public class Admin
         {
             Console.Clear();
             Console.WriteLine("Edit Product");
-           
+
 
             string[] lines = File.ReadAllLines("../../../products.csv");
 
@@ -190,9 +157,9 @@ public class Admin
                 Console.WriteLine(line); //displays product list
             }
 
-            
+
             Console.WriteLine("Which product would you like to edit?");
-           
+
             Console.Write("Please type in the product name: ");
             string? productToEdit = Console.ReadLine();
 
@@ -207,7 +174,7 @@ public class Admin
             {
                 Console.Clear();
                 Console.WriteLine("Invalid entry.");
-                
+
                 Console.WriteLine("Press any key to try again! Make sure to use correct spelling.");
                 string? anykey = Console.ReadLine();
                 continue;
@@ -241,34 +208,22 @@ public class Admin
 
             if (menuselection == "1")
             {
-                {
-                    AddProduct();
-                }
+                AddProduct();
                 break;
             }
-
             if (menuselection == "2")
             {
-                {
-                    Console.WriteLine("Display Productlist."); //code missing display updated product list
-                }
+                Console.WriteLine("Display Productlist."); //code missing display updated product list
                 break;
             }
-
             if (menuselection == "m")
             {
-                {
-                    AdminMainMenu();
-                }
+                AdminMainMenu();
                 break;
             }
-
             if (menuselection == "x")
             {
-                {
-                    break; // AdminMenu();
-                }
-
+                break; // AdminMenu();
             }
             else
             {
@@ -305,9 +260,7 @@ public class Admin
 
             if (productToEdit == "M")
             {
-                {
                     Console.WriteLine("Code needed to delete product.");   //code needed to delete product!
-                }
                 break;
             }
             else

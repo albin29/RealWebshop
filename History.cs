@@ -23,7 +23,6 @@ public class History
             Console.WriteLine("User: " + username + " bought " + item + " for " + price + " sek " + " at " + dateAndTime);
 
         }
-
     }
     public void ViewBuyHistory(string name)
     {
