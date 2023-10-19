@@ -252,35 +252,39 @@ public class Admin
     {
         while (true)
         {
-            Console.Clear();
-            Console.WriteLine("Delete Product");
-
-
-            string[] lines = File.ReadAllLines("../../../products.csv");
-
-            foreach (string line in lines)
+            while (true)
             {
-                Console.WriteLine(line); //displays product list
-            }
+                Console.WriteLine("You are deleting a product.");
+                Console.WriteLine("Here's a list of all products.");
 
+                int n = 0;
+                foreach (var product in Products.productList)
+                {
+                    Console.WriteLine((++n).ToString() + ": " + product.Name + ", " + product.Price);
+                }
 
-            Console.WriteLine("Which product would you like to delete?");
-            Console.Write("Please type in the product name: ");
-            string? productToEdit = Console.ReadLine();
+                Console.WriteLine("Enter a product's number to remove that product.");
+                Console.WriteLine("Enter 0 to exit this mode.");
 
-            if (productToEdit == "M")
-            {
-                    Console.WriteLine("Code needed to delete product.");   //code needed to delete product!
-                break;
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                string id = Console.ReadLine();
+                if (id.Length == 0)
+                {
+                    Console.WriteLine("You have successfully failed to enter a product number.");
+                    continue;
+                }
 
-                Console.WriteLine("Press any key to try again! Make sure to use correct spelling.");
-                string? anykey = Console.ReadLine();
-                continue;
+                if (id == "0")
+                {
+                    return;
+                }
+
+                int intId;
+                if (int.TryParse(id, out intId))
+                {
+                    Product product = Products.productList[(intId - 1)];
+                    Products.UnregisterProduct(product);
+                    Console.WriteLine("You have successfully removed " + product.Name + "!");
+                }
             }
         }
     }//some code missing
