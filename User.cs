@@ -55,8 +55,6 @@ public class User
             loginlistUser.Add(userinputname, passwordinput);
             // Adds the user to the CSV file
             File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}\n");
-            
-
             break;
         }
         return true;
@@ -151,7 +149,7 @@ public class User
                     for (int i = 0; i < shoppingList.Count; i++)
                     {
                         totalAmount += shoppingList[i].Price;
-                        sw.WriteLine(realusername + ";" + shoppingList[i].Name + ";" + shoppingList[i].Price + ";" + DateTime.Now.ToString());
+                        sw.WriteLine(realusername + "," + shoppingList[i].Name + "," + shoppingList[i].Price + "," + DateTime.Now.ToString());
                     }
 
                 }

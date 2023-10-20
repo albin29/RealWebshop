@@ -14,7 +14,7 @@ public class History
 
         foreach (string line in filen)
         {
-            filen = line.Split(';');
+            filen = line.Split(',');
             string username = filen[0];
             string item = filen[1];
             string price = filen[2];
@@ -34,8 +34,7 @@ public class History
             {
                 continue;
             }
-
-            filen = line.Split(';');
+            filen = line.Split(',');
             string itemname = filen[0];
             string item = filen[1];
             string price = filen[2];

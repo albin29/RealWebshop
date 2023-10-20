@@ -58,7 +58,6 @@ public static class Products
             ));
         }
     }
-
     public static void ShopItems(List<Product> shoppinglist)
     {
         while (true)

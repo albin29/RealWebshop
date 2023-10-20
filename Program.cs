@@ -7,13 +7,8 @@ public class Program
 
     static void Main(string[] args)
     {
-        
-        // Gets admin and user functions to use in main
-        //Admin admin = new Admin();
         User user = new User();
         Admin admin = new Admin(user);
-      // user.Init();
-
         while (true)
         {
             Console.WriteLine("Welcome to the store system!");
