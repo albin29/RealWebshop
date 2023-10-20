@@ -31,7 +31,7 @@ public class Admin
             if (enteredpassword == adminpassword)
             {
                 AdminMainMenu();
-                
+
             }
             else
             {
@@ -59,7 +59,7 @@ public class Admin
             if (menuselection == "1")
             {
                 ProductMenu();
-                
+
             }
             else if (menuselection == "2")
             {
@@ -72,7 +72,7 @@ public class Admin
             else if (menuselection == "x")
             {
                 //Main();
-                    break;
+                break;
             }
             else
             {
@@ -153,9 +153,8 @@ public class Admin
                 Console.WriteLine(line); //displays product list
             }
 
-
+            Console.WriteLine();
             Console.WriteLine("Which product would you like to edit?\n");
-
             Console.Write("Please type in the product name: ");
             string? productToEdit = Console.ReadLine();
 
@@ -177,7 +176,7 @@ public class Admin
             }
         }
     }//some code missing!
-    private void AddProduct()
+    public void AddProduct()
     {
         Console.Clear();
         Console.WriteLine("Add a new product\n");
@@ -219,7 +218,7 @@ public class Admin
             else if (menuselection == "x")
             {
                 //Main();
-                break; 
+                break;
             }
             else
             {
@@ -232,7 +231,6 @@ public class Admin
 
         }
     }
-
     public void DeleteProduct()
 
     {
@@ -256,7 +254,7 @@ public class Admin
 
             if (productToEdit == "M")
             {
-                    Console.WriteLine("Code needed to delete product.");   //code needed to delete product!
+                Console.WriteLine("Code needed to delete product.");   //code needed to delete product!
                 break;
             }
             else
@@ -286,22 +284,22 @@ public class Admin
 
             if (menuselection == "1")
             {
-                    AddUser();
+                AddUser();
             }
 
             if (menuselection == "2")
             {
-                    EditUser();
+                EditUser();
             }
 
             if (menuselection == "3")
             {
-                    DeleteUser();
+                DeleteUser();
             }
 
             else if (menuselection == "m")
             {
-                    AdminMainMenu();
+                AdminMainMenu();
             }
 
             else if (menuselection == "x")
@@ -341,7 +339,7 @@ public class Admin
 
             if (menuselection == "m")
             {
-                    AdminMainMenu();
+                AdminMainMenu();
             }
 
             else if (menuselection == "x")
@@ -440,6 +438,9 @@ public class Admin
             }
         }
     } //some code missing
+
+    public record Purchase(string usernames, string products, string prices, string purchasetime);
+
     public void DisplayBuyHistory()
     {
         while (true)
@@ -447,15 +448,34 @@ public class Admin
             Console.Clear();
             Console.WriteLine("Order and transaction history\n");
 
+            List<Purchase> purchases = new List<Purchase>();
+            List<string> lines = File.ReadAllLines("../../../buyHistory.csv").ToList;
 
-            string[] lines = File.ReadAllLines("../../../buyHistory.csv");
+            string usernames;
+            string products;
+            string prices;
+            string purchasetime;
 
-            foreach (string line in lines)
+            foreach (var line in lines)
             {
-                Console.WriteLine(line); //displays purchase history
+                string[] entries = line.Split(',');
+                Purchase newPurchase = new Purchase();
+                {
+                    usernames = entries[0];
+                    products = entries[1];
+                    prices = entries[2];
+                    purchasetime = entries[3];
+
+                    purchases.Add(newPurchase);
+                }
+
+            }
+            foreach (var purchase in purchases)
+            { 
+                Console.WriteLine(value: $" User: {usernames}, product: {products}, price: {prices}, date & time of purchase: {purchasetime} "); //displays purchase history
             }
 
-
+            Console.WriteLine();
             Console.WriteLine("What would your like to do next?\n");
 
             Console.WriteLine("m - to go back to your main menu.");
