@@ -2,7 +2,7 @@
 
 public class LoginMenu
 {
-    public static void RegisterUser()
+    public static Boolean RegisterUser()
     {
         string[] userCSV = File.ReadAllLines("../../../users.csv");
 
@@ -10,6 +10,7 @@ public class LoginMenu
 
         while ((username.Length < 3) && (!username.Contains(" ")))
         {
+            Console.Clear();
             Console.WriteLine("Please enter your desired username (at least 3 characters with no empty spaces)");
             username = Console.ReadLine();
             foreach (var item in userCSV)
@@ -20,7 +21,7 @@ public class LoginMenu
                     Console.WriteLine("Sorry, username is taken");
                     Console.ReadKey();
                     Console.Clear();
-                    continue;
+                    RegisterUser();
                 }
             }
         }
@@ -32,44 +33,53 @@ public class LoginMenu
             password = Console.ReadLine();
         }
 
-
         File.AppendAllText("../../../users.csv", $"{username},{password},{Role.Customer}\n");
+        return true;
     }
     public static IUser? LoginUser()
     {
         string[] userCSV = File.ReadAllLines("../../../users.csv");
-
+        Console.Clear();
         Console.WriteLine("Please enter your username");
 
+        string? username = Console.ReadLine();
         foreach (var item in userCSV)
         {
             string[] part = item.Split(",");
             string existingUsername = part[0];
             string existingPassword = part[1];
 
-            string? username = Console.ReadLine();
 
             if (username == existingUsername)
             {
+                
                 Console.WriteLine("Please enter your password");
                 string? password = Console.ReadLine();
 
                 if (password == existingPassword)
                 {
-                    if (Enum.TryParse(part[2]))
+                    Console.Clear();
+                    if (Enum.TryParse(part[2], out Role role))
+                    {
+                        switch (role)
+                        {
+                            case Role.Customer:
+                                return new Customer(username);
+
+                            case Role.Admin:
+                                return new Admin(username);
+                        }
+                    }
                 }
-
-
             }
-
-
+            else
+            {
+                Console.WriteLine("\nSorry, there is no such user in our books");
+                Console.ReadKey();
+                Console.Clear();
+                return null;
+            }
         }
-
-
-
         return null;
     }
-
-
-
 }

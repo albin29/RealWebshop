@@ -11,37 +11,12 @@ using Microsoft.Win32;
 
 namespace Webshop;
 
-public class Admin
+public record Admin(string name) : IUser
 {
     public string username = "admin";
     string adminpassword = "123";
 
-    Customer user = new Customer();
-    public void AdminMenu()
-    {
-
-        Console.Clear();
-        Console.WriteLine("Admin Login\n");
-
-        while (true)
-        {
-            Console.Write("Please enter your admin password: ");
-            string? enteredpassword = Console.ReadLine();
-
-            if (enteredpassword == adminpassword)
-            {
-                AdminMainMenu();
-                
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("The password was wrong.");
-                continue;
-            }
-        }
-    }
-    public void AdminMainMenu()
+    public void MainMenu()
     {
         while (true)
         {
@@ -59,7 +34,7 @@ public class Admin
             if (menuselection == "1")
             {
                 ProductMenu();
-                
+
             }
             else if (menuselection == "2")
             {
@@ -72,7 +47,7 @@ public class Admin
             else if (menuselection == "x")
             {
                 //Main();
-                    break;
+                break;
             }
             else
             {
@@ -118,7 +93,7 @@ public class Admin
 
             else if (menuselection == "m")
             {
-                AdminMainMenu();
+                MainMenu();
             }
             else if (menuselection == "x")
             {
@@ -212,12 +187,12 @@ public class Admin
             }
             else if (menuselection == "m")
             {
-                AdminMainMenu();
+                MainMenu();
             }
             else if (menuselection == "x")
             {
                 //Main();
-                break; 
+                break;
             }
             else
             {
@@ -254,7 +229,7 @@ public class Admin
 
             if (productToEdit == "M")
             {
-                    Console.WriteLine("Code needed to delete product.");   //code needed to delete product!
+                Console.WriteLine("Code needed to delete product.");   //code needed to delete product!
                 break;
             }
             else
@@ -284,22 +259,22 @@ public class Admin
 
             if (menuselection == "1")
             {
-                    AddUser();
+                AddUser();
             }
 
             if (menuselection == "2")
             {
-                    EditUser();
+                EditUser();
             }
 
             if (menuselection == "3")
             {
-                    DeleteUser();
+                DeleteUser();
             }
 
             else if (menuselection == "m")
             {
-                    AdminMainMenu();
+                MainMenu();
             }
 
             else if (menuselection == "x")
@@ -324,7 +299,10 @@ public class Admin
     }
     public void AddUser()
     {
-        user.RegisterUser(); // Accessing the public method
+        Console.WriteLine("Please enter the customer name you wish to add");
+        
+
+      //  Customer customer = new Customer(Console.ReadLine(), List<Product> Cart);
 
         while (true)
         {
@@ -339,7 +317,7 @@ public class Admin
 
             if (menuselection == "m")
             {
-                    AdminMainMenu();
+                MainMenu();
             }
 
             else if (menuselection == "x")
@@ -464,13 +442,13 @@ public class Admin
 
             if (menuselection == "m")
             {
-                    AdminMainMenu();
+                MainMenu();
             }
 
             else if (menuselection == "x")
             {
-                    //Main();
-                    break;  
+                //Main();
+                break;
 
             }
             else
