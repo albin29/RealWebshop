@@ -33,7 +33,8 @@ public class User
         string? passwordinput;
         while (true)
         {
-            Console.WriteLine("Please enter a unique username of your choice\n");
+            Console.Clear();
+            Console.Write("Please enter a unique username of your choice: ");
             string userinputname = Console.ReadLine();
             if (UsernameExists(userinputname))
             {
@@ -43,7 +44,8 @@ public class User
             }
             while (true)
             {
-                Console.WriteLine("Please choose a password");
+                Console.WriteLine(); 
+                Console.Write("Please choose a password: ");
                 passwordinput = Console.ReadLine();
 
                 if (passwordinput == "")
@@ -53,7 +55,8 @@ public class User
                 }
                 break;
             }
-            Console.WriteLine(userinputname + "You sucessfully registered as a new customer!\n");
+            Console.Clear();
+            Console.WriteLine(userinputname + ", has sucessfully been registered as a new customer!\n");
             loginlistUser.Add(userinputname, passwordinput);
             // Adds the user to the CSV file
             using (StreamWriter sw = File.AppendText("../../../users.csv"))

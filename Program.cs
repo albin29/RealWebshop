@@ -16,6 +16,7 @@ public class Program
 
         while (true)
         {
+            Console.Clear();
             Console.WriteLine("Welcome to the store system!\n");
             Console.WriteLine("1 - to log in as admin");
             Console.WriteLine("2 - to log in as a customer");

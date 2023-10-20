@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace Webshop;
 
 public record Product(
-     float Price,
-     string Name
+
+    float Price,
+    string Name
 );
 public static class Products
 {

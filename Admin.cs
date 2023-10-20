@@ -20,6 +20,7 @@ public class Admin
     public void AdminMenu()
     {
 
+        Console.Clear();
         Console.WriteLine("Admin Login\n");
 
         while (true)
@@ -30,11 +31,12 @@ public class Admin
             if (enteredpassword == adminpassword)
             {
                 AdminMainMenu();
-                break;
+                
             }
             else
             {
-                Console.WriteLine("The password was wrong");
+                Console.Clear();
+                Console.WriteLine("The password was wrong.");
                 continue;
             }
         }
@@ -57,21 +59,19 @@ public class Admin
             if (menuselection == "1")
             {
                 ProductMenu();
-                break;
+                
             }
             else if (menuselection == "2")
             {
                 UserMenu();
-                break;
             }
             else if (menuselection == "3")
             {
                 DisplayBuyHistory();
-                break;
             }
             else if (menuselection == "x")
             {
-                AdminMenu();
+                //Main();
                     break;
             }
             else
@@ -106,29 +106,25 @@ public class Admin
             if (menuselection == "1")
             {
                 AddProduct();
-                break;
             }
             else if (menuselection == "2")
             {
                 EditProduct();
-                break;
             }
 
             else if (menuselection == "3")
             {
                 DeleteProduct();
-                break;
             }
 
 
             else if (menuselection == "m")
             {
                 AdminMainMenu();
-                break;
             }
             else if (menuselection == "x")
             {
-                AdminMenu();
+                break;
             }
             else
             {
@@ -185,19 +181,20 @@ public class Admin
     {
         Console.Clear();
         Console.WriteLine("Add a new product\n");
-        Console.WriteLine("Product List\n"); //Productlist display
         Console.Write("Please enter a unique product name: ");
-        string? productName = Console.ReadLine();
+        string productName = Console.ReadLine();
         Console.WriteLine();
-
-        Console.WriteLine("Please enter a product price in $ per unit: ");
+        Console.Write("Please enter a product price in $ per unit: ");
         string? productPrice = Console.ReadLine();
+
+        string[] productNames = { };
+
+        //File.WriteAllLines("../../../products.csv", productName);
+
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("You successfully added " + productName + " at " + productPrice + " SEK per unit to your product list.");
-
-
+            Console.WriteLine("You successfully added " + productName + " at " + productPrice + " $ per unit to your product list.\n");
             Console.WriteLine("What would you like to do next?\n");
             Console.WriteLine("1 - to add another product.");
             Console.WriteLine("2 - to view product list.");
@@ -210,21 +207,18 @@ public class Admin
             if (menuselection == "1")
             {
                 AddProduct();
-                break;
             }
-            if (menuselection == "2")
+            else if (menuselection == "2")
             {
                 Console.WriteLine("Display Productlist."); //code missing display updated product list
-                break;
             }
-            if (menuselection == "m")
+            else if (menuselection == "m")
             {
                 AdminMainMenu();
-                break;
             }
-            if (menuselection == "x")
+            else if (menuselection == "x")
             {
-                AdminMenu();
+                //Main();
                 break; 
             }
             else
@@ -292,40 +286,28 @@ public class Admin
 
             if (menuselection == "1")
             {
-                {
                     AddUser();
-                }
-                break;
             }
 
             if (menuselection == "2")
             {
-                {
                     EditUser();
-                }
-                break;
             }
 
             if (menuselection == "3")
             {
-                {
                     DeleteUser();
-                }
-                break;
             }
 
             else if (menuselection == "m")
             {
-                {
                     AdminMainMenu();
-                }
-                break;
             }
 
             else if (menuselection == "x")
             {
                 {
-                    AdminMenu();
+                    //Main();
                     break;
                 }
 
@@ -342,7 +324,6 @@ public class Admin
         }
 
     }
-
     public void AddUser()
     {
         user.RegisterUser(); // Accessing the public method
@@ -360,16 +341,13 @@ public class Admin
 
             if (menuselection == "m")
             {
-                {
                     AdminMainMenu();
-                }
-                break;
             }
 
             else if (menuselection == "x")
             {
                 {
-                    //AdminMenu();
+                    //Main();
                 }
                 break;
             }
@@ -488,18 +466,13 @@ public class Admin
 
             if (menuselection == "m")
             {
-                {
                     AdminMainMenu();
-                }
-                break;
             }
 
             else if (menuselection == "x")
             {
-                {
-                    AdminMenu();
+                    //Main();
                     break;  
-                }
 
             }
             else
