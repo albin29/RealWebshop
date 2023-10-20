@@ -82,7 +82,7 @@ public class Admin
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry.\n");
 
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
@@ -127,16 +127,16 @@ public class Admin
             }
             else if (menuselection == "x")
             {
-                break;
+                AdminMenu();
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry.\n");
 
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
-                continue;
+              continue;
             }
         }
     }
@@ -154,13 +154,11 @@ public class Admin
         float price = product.Price;
         string name = product.Name;
 
-
-
         while (true)
         {
-            Products.RegisterProduct(product);
+            Products.RegisterProduct(product); //add a product
             Console.Clear();
-            Console.WriteLine("You successfully added " + productName + " at " + productPrice + " $ per unit to your product list.\n");
+            Console.WriteLine("You successfully added '" + productName + "' at " + productPrice + " $ per unit to your product list.\n");
             Console.WriteLine("What would you like to do next?\n");
             Console.WriteLine("1 - to add another product.");
             Console.WriteLine("2 - to view product list.");
@@ -176,7 +174,7 @@ public class Admin
             }
             else if (menuselection == "2")
             {
-                Console.WriteLine("Display Productlist."); //code missing display updated product list
+                Products.ListProducts();
             }
             else if (menuselection == "m")
             {
@@ -184,12 +182,12 @@ public class Admin
             }
             else if (menuselection == "x")
             {
-                Environment.Exit(0);
+                AdminMenu();
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry.\n");
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
                 continue;
@@ -198,54 +196,105 @@ public class Admin
         }
     }
     public void EditProduct()
-
     {
         while (true)
         {
-            Console.Clear();
-            Console.WriteLine("Edit Product\n");
+            Products.ListProducts();
+            Console.WriteLine("\nWhich product would you like to edit (enter the product number or 0 to go back to the menu)?");
+            string userChoice = Console.ReadLine();
 
-            Products.WriteProducts();
-
-           
-                /*string lines = "";
-                foreach (var product in productList)
-                {
-                    lines += product.Name + ";" + product.Price + "\n";
-                }
-                File.WriteAllText("../../../products.csv", lines);*/
-            
-
-            string[] lines = File.ReadAllLines("../../../products.csv");
-
-            foreach (string line in lines)
+            if (userChoice == "0")
             {
-                Console.WriteLine(line); //displays product list
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("Which product would you like to edit?\n");
-            Console.Write("Please type in the product name: ");
-            string? productToEdit = Console.ReadLine();
-
-            if (productToEdit == "m")
-            {
-                {
-                    Console.WriteLine("Code needed to edit product.");
-                }
+                Console.Clear();
                 break;
+            }
+            if (int.TryParse(userChoice, out int productNumber) && productNumber >= 1 && productNumber <= Products.productList.Count)
+            {
+                Console.Clear();
+                int index = productNumber - 1; // Adjust for 0-based indexing
+
+                Console.WriteLine($"You selected: {Products.productList[index].Name}");
+                Console.Write("Enter the new price: ");
+
+                if (float.TryParse(Console.ReadLine(), out float newPrice))
+                {
+                    // Create a new Product with the updated price
+                    Products.productList[index] = new Product(newPrice, Products.productList[index].Name);
+                    Products.WriteProducts(); // Save the updated product list to the CSV file
+                    Console.Clear();
+                    Console.WriteLine("Product price updated successfully!");
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey();
+                    Console.Clear();
+                    break;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Invalid price. Please enter a valid price.");
+                    Console.WriteLine("Press any key to try again.");
+                    Console.ReadKey();
+                }
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
-
-                Console.WriteLine("Press any key to try again! Make sure to use correct spelling.");
-                string? anykey = Console.ReadLine();
-                continue;
+                Console.WriteLine("Invalid entry. Please enter a valid product number.");
+                Console.WriteLine("Press any key to try again.");
+                Console.ReadKey();
             }
         }
-    }//some code missing!
+    }
+
+    /* public void EditProduct()
+
+     {
+         while (true)
+         {
+             Console.Clear();
+             Console.WriteLine("Edit Product\n");
+
+             Products.WriteProducts();
+
+
+                 /*string lines = "";
+                 foreach (var product in productList)
+                 {
+                     lines += product.Name + ";" + product.Price + "\n";
+                 }
+                 File.WriteAllText("../../../products.csv", lines);
+
+
+             string[] lines = File.ReadAllLines("../../../products.csv");
+
+             foreach (string line in lines)
+             {
+                 Console.WriteLine(line); //displays product list
+             }
+
+             Console.WriteLine();
+             Console.WriteLine("Which product would you like to edit?\n");
+             Console.Write("Please type in the product name: ");
+             string? productToEdit = Console.ReadLine();
+
+             if (productToEdit == "m")
+             {
+                 {
+                     Console.WriteLine("Code needed to edit product.");
+                 }
+                 break;
+             }
+             else
+             {
+                 Console.Clear();
+                 Console.WriteLine("Invalid entry.");
+
+                 Console.WriteLine("Press any key to try again! Make sure to use correct spelling.");
+                 string? anykey = Console.ReadLine();
+                 continue;
+             }
+         }
+     }//some code missing!*/
     public void DeleteProduct()
 
     {

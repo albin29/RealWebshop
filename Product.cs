@@ -28,7 +28,17 @@ public static class Products
         productList.Remove(product);
         WriteProducts();
     }
-
+    
+    public static void ListProducts()
+    {
+        Console.Clear();
+        Console.WriteLine("Edit Product\n");
+        Console.WriteLine("Products:\n");
+        for (int i = 0; i < Products.productList.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {Products.productList[i].Name} - {Products.productList[i].Price} $");
+        }
+    }
     public static void WriteProducts()
 
     {
