@@ -28,7 +28,7 @@ public static class Products
         productList.Remove(product);
         WriteProducts();
     }
-    private static void WriteProducts()
+    public static void WriteProducts()
     {
         string lines = "";
         foreach (var product in productList)

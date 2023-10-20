@@ -150,34 +150,60 @@ public class Admin
         {
             Console.Clear();
             Console.WriteLine("Edit Product");
-            string[] lines = File.ReadAllLines("../../../products.csv");
+            Console.WriteLine("Current Products:");
 
-            foreach (string line in lines)
+            for (int i = 0; i < Products.productList.Count; i++)
             {
-                Console.WriteLine(line); //displays product list
+                Console.WriteLine($"{i + 1}. {Products.productList[i].Name} - {Products.productList[i].Price} SEK");
             }
-            Console.WriteLine("Which product would you like to edit?");
-            Console.Write("Please type in the product name: ");
-            string? productToEdit = Console.ReadLine();
 
-            if (productToEdit == "m")
+            Console.WriteLine("\nWhich product would you like to edit (enter the product number or 0 to go back to the menu)?");
+            string userChoice = Console.ReadLine();
+
+            if (userChoice == "0")
             {
-                {
-                    Console.WriteLine("Code needed to edit product.");
-                }
+                Console.Clear();
                 break;
+            }
+
+            if (int.TryParse(userChoice, out int productNumber) && productNumber >= 1 && productNumber <= Products.productList.Count)
+            {
+                Console.Clear();
+                int index = productNumber - 1; // Adjust for 0-based indexing
+
+                Console.WriteLine($"You selected: {Products.productList[index].Name}");
+                Console.Write("Enter the new price: ");
+
+                if (float.TryParse(Console.ReadLine(), out float newPrice))
+                {
+                    // Create a new Product with the updated price
+                    Products.productList[index] = new Product(newPrice, Products.productList[index].Name);
+                    Products.WriteProducts(); // Save the updated product list to the CSV file
+                    Console.Clear();
+                    Console.WriteLine("Product price updated successfully!");
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey();
+                    Console.Clear();
+                    break;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Invalid price. Please enter a valid price.");
+                    Console.WriteLine("Press any key to try again.");
+                    Console.ReadKey();
+                }
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
-
-                Console.WriteLine("Press any key to try again! Make sure to use correct spelling.");
-                string? anykey = Console.ReadLine();
-                continue;
+                Console.WriteLine("Invalid entry. Please enter a valid product number.");
+                Console.WriteLine("Press any key to try again.");
+                Console.ReadKey();
             }
         }
-    }//some code missing!
+    }
+
     private void AddProduct()
     {
         Console.Clear();
