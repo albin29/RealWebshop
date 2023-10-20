@@ -118,8 +118,6 @@ public class Admin
                 DeleteProduct();
                 break;
             }
-
-
             else if (menuselection == "m")
             {
                 AdminMainMenu();
@@ -181,11 +179,9 @@ public class Admin
         Console.WriteLine("Product List"); //Productlist display
         Console.Write("Please enter a unique product name: ");
         string? productName = Console.ReadLine();
-
         Console.WriteLine("Please enter a product price in SEK per unit: ");
         string? productPrice = Console.ReadLine();
         Product product = new Product(float.Parse(productPrice), productName);
-
         float price = product.Price;
         string name = product.Name;
         while (true)
@@ -233,7 +229,6 @@ public class Admin
         }
     }
     public void DeleteProduct()
-
     {
         while (true)
         {

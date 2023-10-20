@@ -54,11 +54,9 @@ public class User
             Console.WriteLine(userinputname + " Sucessfully created new user");
             loginlistUser.Add(userinputname, passwordinput);
             // Adds the user to the CSV file
-            using (StreamWriter sw = File.AppendText("../../../users.csv"))
-            {
+            File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}\n");
+            
 
-                sw.WriteLine(userinputname + ";" + passwordinput);
-            }
             break;
         }
         return true;
@@ -74,7 +72,7 @@ public class User
             {
                 continue;
             }
-            filen = line.Split(';');
+            filen = line.Split(',');
             string name2 = filen[0];
             string password2 = filen[1];
             loginlistUser.Add(name2, password2);
@@ -128,9 +126,7 @@ public class User
             {
                 Console.Clear();
                 Console.WriteLine(realusername + " Buyhistory:\n");
-
                 history.ViewBuyHistory(realusername);
-
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -162,7 +158,6 @@ public class User
             }
             else if (userChoice == "5")
             {
-
                 break;
             }
             else
