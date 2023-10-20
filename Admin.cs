@@ -88,9 +88,7 @@ public class Admin
                 string? anykey = Console.ReadLine();
                 continue;
             }
-
         }
-
     }
     public void ProductMenu()
     {
