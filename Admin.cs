@@ -9,6 +9,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Diagnostics;
 using Microsoft.Win32;
 using System.Xml.Linq;
+using System.Formats.Asn1;
+using System.Globalization;
 
 namespace Webshop;
 
@@ -184,9 +186,9 @@ public class Admin
     }//some code missing!
     private void AddProduct()
     {
-        
-        
-        
+
+
+
 
         Console.Clear();
         Console.WriteLine("Add a new product");
@@ -435,6 +437,15 @@ public class Admin
             }
         }
     }
+
+    public void removeUser()
+    {
+
+
+
+
+        // write csv
+    }
     public void DeleteUser()
     {
         while (true)
@@ -454,12 +465,15 @@ public class Admin
             Console.WriteLine("Which user would you like to delete?");
 
             Console.Write("Please type in the user name: ");
-            string? productToEdit = Console.ReadLine();
+            string? userToEdit = Console.ReadLine();
 
-            if (productToEdit == "M")
+            if (user.loginlistUser.ContainsKey(userToEdit))
             {
                 {
-                    Console.WriteLine("Code needed to delete user.");   //code needed HERE to delete user!
+                    user.loginlistUser.Remove(userToEdit);
+                    string csvContent = string.Join(Environment.NewLine, user.loginlistUser.Select(entry => $"{entry.Key};{entry.Value}"));
+                    // Write the content to the file, replacing any existing content
+                    File.WriteAllText("../../../users.csv", csvContent);
                 }
                 break;
             }
