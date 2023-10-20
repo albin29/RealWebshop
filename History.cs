@@ -20,7 +20,7 @@ public class History
             string price = filen[2];
             string dateAndTime = filen[3];
 
-            Console.WriteLine("User: " + username + " bought " + item + " for " + price + " sek " + " at " + dateAndTime);
+            Console.WriteLine($"User: {username}; Purchased item: {item}; Price price: {price}$; Date: {dateAndTime}");
 
         }
     }

@@ -5,7 +5,7 @@ namespace Webshop;
 public class Program
 {
 
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         
         // Gets admin and user functions to use in main

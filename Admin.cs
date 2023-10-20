@@ -8,6 +8,7 @@ using System.IO;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Diagnostics;
 using Microsoft.Win32;
+using System;
 
 namespace Webshop;
 
@@ -25,14 +26,19 @@ public class Admin
 
         while (true)
         {
-            Console.Write("Please enter your admin password: ");
+            Console.Write("Please enter your admin password OR '2' to switch to User Login: ");
             string? enteredpassword = Console.ReadLine();
 
             if (enteredpassword == adminpassword)
             {
                 AdminMainMenu();
-
             }
+
+            else if (enteredpassword == "2")
+            {
+                user.Login();
+            }
+
             else
             {
                 Console.Clear();
@@ -71,8 +77,7 @@ public class Admin
             }
             else if (menuselection == "x")
             {
-                //Main();
-                break;
+                AdminMenu();
             }
             else
             {
@@ -137,6 +142,63 @@ public class Admin
             }
         }
     }
+    public void AddProduct()
+    {
+        Console.Clear();
+        Console.WriteLine("Add a new product\n");
+        Console.Write("Please enter a unique product name: ");
+        string? productName = Console.ReadLine();
+        Console.WriteLine();
+        Console.Write("Please enter a product price in $ per unit: ");
+        string? productPrice = Console.ReadLine();
+
+        Product product = new Product(float.Parse(productPrice), productName);
+        float price = product.Price;
+        string name = product.Name;
+
+
+
+        while (true)
+        {
+            Products.RegisterProduct(product);
+            Console.Clear();
+            Console.WriteLine("You successfully added " + productName + " at " + productPrice + " $ per unit to your product list.\n");
+            Console.WriteLine("What would you like to do next?\n");
+            Console.WriteLine("1 - to add another product.");
+            Console.WriteLine("2 - to view product list.");
+            Console.WriteLine("m - to go back to your main menu.");
+            Console.WriteLine("x - to log out.\n");
+
+            Console.Write("Please navigate by entering the preceding character: ");
+            string? menuselection = Console.ReadLine();
+
+            if (menuselection == "1")
+            {
+                AddProduct();
+            }
+            else if (menuselection == "2")
+            {
+                Console.WriteLine("Display Productlist."); //code missing display updated product list
+            }
+            else if (menuselection == "m")
+            {
+                AdminMainMenu();
+            }
+            else if (menuselection == "x")
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Press any key to try again!");
+                string? anykey = Console.ReadLine();
+                continue;
+            }
+
+        }
+    }
     public void EditProduct()
 
     {
@@ -145,6 +207,16 @@ public class Admin
             Console.Clear();
             Console.WriteLine("Edit Product\n");
 
+            Products.WriteProducts();
+
+           
+                /*string lines = "";
+                foreach (var product in productList)
+                {
+                    lines += product.Name + ";" + product.Price + "\n";
+                }
+                File.WriteAllText("../../../products.csv", lines);*/
+            
 
             string[] lines = File.ReadAllLines("../../../products.csv");
 
@@ -176,61 +248,6 @@ public class Admin
             }
         }
     }//some code missing!
-    public void AddProduct()
-    {
-        Console.Clear();
-        Console.WriteLine("Add a new product\n");
-        Console.Write("Please enter a unique product name: ");
-        string productName = Console.ReadLine();
-        Console.WriteLine();
-        Console.Write("Please enter a product price in $ per unit: ");
-        string? productPrice = Console.ReadLine();
-
-        string[] productNames = { };
-
-        //File.WriteAllLines("../../../products.csv", productName);
-
-        while (true)
-        {
-            Console.Clear();
-            Console.WriteLine("You successfully added " + productName + " at " + productPrice + " $ per unit to your product list.\n");
-            Console.WriteLine("What would you like to do next?\n");
-            Console.WriteLine("1 - to add another product.");
-            Console.WriteLine("2 - to view product list.");
-            Console.WriteLine("m - to go back to your main menu.");
-            Console.WriteLine("x - to log out.\n");
-
-            Console.Write("Please navigate by entering the preceding character: ");
-            string? menuselection = Console.ReadLine();
-
-            if (menuselection == "1")
-            {
-                AddProduct();
-            }
-            else if (menuselection == "2")
-            {
-                Console.WriteLine("Display Productlist."); //code missing display updated product list
-            }
-            else if (menuselection == "m")
-            {
-                AdminMainMenu();
-            }
-            else if (menuselection == "x")
-            {
-                //Main();
-                break;
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("Invalid entry.");
-                Console.WriteLine("Press any key to try again!");
-                string? anykey = Console.ReadLine();
-                continue;
-            }
-
-        }
-    }
     public void DeleteProduct()
 
     {
@@ -438,9 +455,6 @@ public class Admin
             }
         }
     } //some code missing
-
-    public record Purchase(string usernames, string products, string prices, string purchasetime);
-
     public void DisplayBuyHistory()
     {
         while (true)
@@ -448,33 +462,9 @@ public class Admin
             Console.Clear();
             Console.WriteLine("Order and transaction history\n");
 
-            List<Purchase> purchases = new List<Purchase>();
-            List<string> lines = File.ReadAllLines("../../../buyHistory.csv").ToList;
-
-            string usernames;
-            string products;
-            string prices;
-            string purchasetime;
-
-            foreach (var line in lines)
-            {
-                string[] entries = line.Split(',');
-                Purchase newPurchase = new Purchase();
-                {
-                    usernames = entries[0];
-                    products = entries[1];
-                    prices = entries[2];
-                    purchasetime = entries[3];
-
-                    purchases.Add(newPurchase);
-                }
-
-            }
-            foreach (var purchase in purchases)
-            { 
-                Console.WriteLine(value: $" User: {usernames}, product: {products}, price: {prices}, date & time of purchase: {purchasetime} "); //displays purchase history
-            }
-
+            History history = new History();
+            history.viewAllBuyHistory();
+           
             Console.WriteLine();
             Console.WriteLine("What would your like to do next?\n");
 
@@ -491,15 +481,12 @@ public class Admin
 
             else if (menuselection == "x")
             {
-                    //Main();
-                    break;  
-
+                    AdminMenu();
             }
             else
             {
                 Console.Clear();
                 Console.WriteLine("Invalid entry.");
-
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
                 continue;
