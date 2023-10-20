@@ -8,6 +8,7 @@ using System.IO;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Diagnostics;
 using Microsoft.Win32;
+using System;
 
 namespace Webshop;
 
@@ -25,14 +26,19 @@ public class Admin
 
         while (true)
         {
-            Console.Write("Please enter your admin password: ");
+            Console.Write("Please enter your admin password OR '2' to switch to User Login: ");
             string? enteredpassword = Console.ReadLine();
 
             if (enteredpassword == adminpassword)
             {
                 AdminMainMenu();
-                
             }
+
+            else if (enteredpassword == "2")
+            {
+                user.Login();
+            }
+
             else
             {
                 Console.Clear();
@@ -59,7 +65,7 @@ public class Admin
             if (menuselection == "1")
             {
                 ProductMenu();
-                
+
             }
             else if (menuselection == "2")
             {
@@ -71,8 +77,7 @@ public class Admin
             }
             else if (menuselection == "x")
             {
-                //Main();
-                    break;
+                AdminMenu();
             }
             else
             {
@@ -135,62 +140,25 @@ public class Admin
             }
         }
     }
-    public void EditProduct()
-
-    {
-        while (true)
-        {
-            Console.Clear();
-            Console.WriteLine("Edit Product\n");
-
-
-            string[] lines = File.ReadAllLines("../../../products.csv");
-
-            foreach (string line in lines)
-            {
-                Console.WriteLine(line); //displays product list
-            }
-
-
-            Console.WriteLine("Which product would you like to edit?\n");
-
-            Console.Write("Please type in the product name: ");
-            string? productToEdit = Console.ReadLine();
-
-            if (productToEdit == "m")
-            {
-                {
-                    Console.WriteLine("Code needed to edit product.");
-                }
-                break;
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("Invalid entry.");
-
-                Console.WriteLine("Press any key to try again! Make sure to use correct spelling.");
-                string? anykey = Console.ReadLine();
-                continue;
-            }
-        }
-    }//some code missing!
-    private void AddProduct()
+    public void AddProduct()
     {
         Console.Clear();
         Console.WriteLine("Add a new product\n");
         Console.Write("Please enter a unique product name: ");
-        string productName = Console.ReadLine();
+        string? productName = Console.ReadLine();
         Console.WriteLine();
         Console.Write("Please enter a product price in $ per unit: ");
         string? productPrice = Console.ReadLine();
 
-        string[] productNames = { };
+        Product product = new Product(float.Parse(productPrice), productName);
+        float price = product.Price;
+        string name = product.Name;
 
-        //File.WriteAllLines("../../../products.csv", productName);
+
 
         while (true)
         {
+            Products.RegisterProduct(product);
             Console.Clear();
             Console.WriteLine("You successfully added " + productName + " at " + productPrice + " $ per unit to your product list.\n");
             Console.WriteLine("What would you like to do next?\n");
@@ -216,8 +184,7 @@ public class Admin
             }
             else if (menuselection == "x")
             {
-                //Main();
-                break; 
+                Environment.Exit(0);
             }
             else
             {
@@ -230,7 +197,55 @@ public class Admin
 
         }
     }
+    public void EditProduct()
 
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Edit Product\n");
+
+            Products.WriteProducts();
+
+           
+                /*string lines = "";
+                foreach (var product in productList)
+                {
+                    lines += product.Name + ";" + product.Price + "\n";
+                }
+                File.WriteAllText("../../../products.csv", lines);*/
+            
+
+            string[] lines = File.ReadAllLines("../../../products.csv");
+
+            foreach (string line in lines)
+            {
+                Console.WriteLine(line); //displays product list
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Which product would you like to edit?\n");
+            Console.Write("Please type in the product name: ");
+            string? productToEdit = Console.ReadLine();
+
+            if (productToEdit == "m")
+            {
+                {
+                    Console.WriteLine("Code needed to edit product.");
+                }
+                break;
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Invalid entry.");
+
+                Console.WriteLine("Press any key to try again! Make sure to use correct spelling.");
+                string? anykey = Console.ReadLine();
+                continue;
+            }
+        }
+    }//some code missing!
     public void DeleteProduct()
 
     {
@@ -254,7 +269,7 @@ public class Admin
 
             if (productToEdit == "M")
             {
-                    Console.WriteLine("Code needed to delete product.");   //code needed to delete product!
+                Console.WriteLine("Code needed to delete product.");   //code needed to delete product!
                 break;
             }
             else
@@ -284,22 +299,22 @@ public class Admin
 
             if (menuselection == "1")
             {
-                    AddUser();
+                AddUser();
             }
 
             if (menuselection == "2")
             {
-                    EditUser();
+                EditUser();
             }
 
             if (menuselection == "3")
             {
-                    DeleteUser();
+                DeleteUser();
             }
 
             else if (menuselection == "m")
             {
-                    AdminMainMenu();
+                AdminMainMenu();
             }
 
             else if (menuselection == "x")
@@ -339,7 +354,7 @@ public class Admin
 
             if (menuselection == "m")
             {
-                    AdminMainMenu();
+                AdminMainMenu();
             }
 
             else if (menuselection == "x")
@@ -445,15 +460,10 @@ public class Admin
             Console.Clear();
             Console.WriteLine("Order and transaction history\n");
 
-
-            string[] lines = File.ReadAllLines("../../../buyHistory.csv");
-
-            foreach (string line in lines)
-            {
-                Console.WriteLine(line); //displays purchase history
-            }
-
-
+            History history = new History();
+            history.viewAllBuyHistory();
+           
+            Console.WriteLine();
             Console.WriteLine("What would your like to do next?\n");
 
             Console.WriteLine("m - to go back to your main menu.");
@@ -469,15 +479,12 @@ public class Admin
 
             else if (menuselection == "x")
             {
-                    //Main();
-                    break;  
-
+                    AdminMenu();
             }
             else
             {
                 Console.Clear();
                 Console.WriteLine("Invalid entry.");
-
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
                 continue;

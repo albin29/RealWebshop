@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +28,9 @@ public static class Products
         productList.Remove(product);
         WriteProducts();
     }
-    private static void WriteProducts() //  (CHANGE) adjusted the seperator from ; to ,
+
+    public static void WriteProducts()
+
     {
         string lines = "";
         foreach (var product in productList)
