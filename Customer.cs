@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Webshop;
 
-public class User
+public class Customer : IUser
 {
     // important stuff
     History history = new History();
@@ -26,52 +26,8 @@ public class User
     }
 
     // Function for registering a new user
-    public bool RegisterUser()
-    {
-
-        string? passwordinput;
-        while (true)
-        {
-            Console.Clear();
-
-            Console.Write("Please enter a unique username of your choice: ");
-
-            string userinputname = Console.ReadLine();
-            if (UsernameExists(userinputname))
-            {
-                Console.Clear();
-                Console.WriteLine("Username already exists");
-                continue;
-            }
-            while (true)
-            {
-                Console.WriteLine(); 
-                Console.Write("Please choose a password: ");
-                passwordinput = Console.ReadLine();
-
-                if (passwordinput == "")
-                {
-                    Console.WriteLine("No empty password allowed");
-                    continue;
-                }
-                break;
-            }
-            Console.Clear();
-
-            Console.WriteLine(userinputname + ", has sucessfully been registered as a new customer!\n");
-
-            loginlistUser.Add(userinputname, passwordinput);
-            // Adds the user to the CSV file
-            //(CHANGE) deleted the streamwriter that Manuel doesnt like AND also changed ; seperator to , seperator
-
-            File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}\n");
-            break;
-        }
-        return true;
-    }
-
     // Dictionary csv for user login and password
-    public User()
+    public Customer()
     {
         string[] filen = File.ReadAllLines("../../../users.csv");
 
@@ -116,7 +72,7 @@ public class User
         return true;
     }
     // Menu presented to user when logged in
-    public void UserLoggedin()
+    public void DisplayMainMenu()
     {
         while (true)
         {

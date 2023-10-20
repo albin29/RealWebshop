@@ -16,7 +16,7 @@ public class Admin
     public string username = "admin";
     string adminpassword = "123";
 
-    User user = new User();
+    Customer user = new Customer();
     public void AdminMenu()
     {
 
