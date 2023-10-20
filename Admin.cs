@@ -19,7 +19,12 @@ public class Admin
     public string username = "admin";
     string adminpassword = "123";
 
-    User user = new User();
+    User user;
+
+    public Admin (User user2) {
+    
+    user = user2;
+    }
     public void AdminMenu()
     {
 
@@ -42,6 +47,7 @@ public class Admin
             }
         }
     }
+
     public void AdminMainMenu()
     {
         while (true)
@@ -125,7 +131,7 @@ public class Admin
             }
             else if (menuselection == "x")
             {
-                //AdminMenu();
+                break;
             }
             else
             {
@@ -388,12 +394,20 @@ public class Admin
             }
             Console.WriteLine("Which user would you like to edit?");
             Console.Write("Please type in the user name: ");
-            string? productToEdit = Console.ReadLine();
+            string? userToEdit = Console.ReadLine();
 
-            if (productToEdit == "M")
+            if (user.loginlistUser.ContainsKey(userToEdit))
             {
                 {
-                    Console.WriteLine("Code needed to edit user.");
+                    Console.WriteLine("Enter new password");
+
+                    string? password = Console.ReadLine();
+                    user.loginlistUser[userToEdit] = password;
+
+                    string csvContent = string.Join(Environment.NewLine, user.loginlistUser.Select(entry => $"{entry.Key},{entry.Value}"));
+                    // Write the content to the file, replacing any existing content
+                    File.WriteAllText("../../../users.csv", csvContent);
+
                 }
                 break;
             }
@@ -402,7 +416,7 @@ public class Admin
                 Console.Clear();
                 Console.WriteLine("Invalid entry.");
 
-                Console.WriteLine("Press any key to try again! Make sure to use correct spelling.");
+                Console.WriteLine("Enter existing account");
                 string? anykey = Console.ReadLine();
                 continue;
             }
@@ -428,10 +442,12 @@ public class Admin
             if (user.loginlistUser.ContainsKey(userToEdit))
             {
                 {
+                    
                     user.loginlistUser.Remove(userToEdit);
-                    string csvContent = string.Join(Environment.NewLine, user.loginlistUser.Select(entry => $"{entry.Key};{entry.Value}"));
+                    string csvContent = string.Join(Environment.NewLine, user.loginlistUser.Select(entry => $"{entry.Key},{entry.Value}"));
                     // Write the content to the file, replacing any existing content
                     File.WriteAllText("../../../users.csv", csvContent);
+
                 }
                 break;
             }

@@ -11,8 +11,8 @@ public class Program
         // Gets admin and user functions to use in main
         //Admin admin = new Admin();
         User user = new User();
-        Admin admin = new Admin();
-      //  user.Init();
+        Admin admin = new Admin(user);
+      // user.Init();
 
         while (true)
         {

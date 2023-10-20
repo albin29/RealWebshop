@@ -72,6 +72,7 @@ public class User
             {
                 continue;
             }
+            
             filen = line.Split(',');
             string name2 = filen[0];
             string password2 = filen[1];
@@ -143,6 +144,7 @@ public class User
             }
             else if (userChoice == "4")
             {
+
                 float totalAmount = 0;
                 using (StreamWriter sw = File.AppendText("../../../buyHistory.csv"))
                 {
@@ -151,7 +153,9 @@ public class User
                         totalAmount += shoppingList[i].Price;
                         sw.WriteLine(realusername + ";" + shoppingList[i].Name + ";" + shoppingList[i].Price + ";" + DateTime.Now.ToString());
                     }
+
                 }
+                shoppingList.Clear();
                 Console.Clear();
                 Console.WriteLine("Your purchase was successful! Total amount paid: " + totalAmount + "$");
                 continue;
