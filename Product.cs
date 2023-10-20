@@ -27,14 +27,15 @@ public static class Products
         productList.Remove(product);
         WriteProducts();
     }
-    private static void WriteProducts()
+    private static void WriteProducts() //  (CHANGE) adjusted the seperator from ; to ,
     {
         string lines = "";
         foreach (var product in productList)
         {
-            lines += product.Name + ";" + product.Price + "\n";
+            lines += product.Name + "," + product.Price + "\n";
         }
         File.WriteAllText("../../../products.csv", lines);
+        
     }
     public static void ReadProducts()
     {
@@ -47,7 +48,7 @@ public static class Products
             {
                 continue;
             }
-            filen = line.Split(';');
+            filen = line.Split(',');
             productname = filen[0];
             string productprice = filen[1];
             productList.Add(new Product

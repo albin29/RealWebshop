@@ -28,11 +28,11 @@ public class User
     // Function for registering a new user
     public bool RegisterUser()
     {
-        
 
         string? passwordinput;
         while (true)
         {
+            Console.Clear();
             Console.WriteLine("Please enter your username");
             string userinputname = Console.ReadLine();
             if (UsernameExists(userinputname))
@@ -53,14 +53,13 @@ public class User
                 }
                 break;
             }
+            Console.Clear();
             Console.WriteLine(userinputname + " Sucessfully created new user");
             loginlistUser.Add(userinputname, passwordinput);
             // Adds the user to the CSV file
-            using (StreamWriter sw = File.AppendText("../../../users.csv"))
-            {
+            //(CHANGE) deleted the streamwriter that Manuel doesnt like AND also changed ; seperator to , seperator
 
-                sw.WriteLine(userinputname + ";" + passwordinput);
-            }
+            File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}\n");
             break;
         }
         return true;
@@ -77,7 +76,7 @@ public class User
             {
                 continue;
             }
-            filen = line.Split(';');
+            filen = line.Split(',');
             string name2 = filen[0];
             string password2 = filen[1];
             loginlistUser.Add(name2, password2);
@@ -86,8 +85,6 @@ public class User
     // Login function for user
     public bool Login()
     {
-        
-
         while (true)
         {
             Console.Clear();
@@ -150,22 +147,24 @@ public class User
                 Console.ReadKey();
                 Console.Clear();
             }
-            else if (userChoice == "4")
+            else if (userChoice == "4")// (CHANGE) added , instead of ; seperator and removed streamwriter + mad sure cart is empty after purchase
             {
                 float totalAmount = 0;
-                using (StreamWriter sw = File.AppendText("../../../buyHistory.csv"))
                 {
                     for (int i = 0; i < shoppingList.Count; i++)
                     {
                         totalAmount += shoppingList[i].Price;
-                        sw.WriteLine(realusername + ";" + shoppingList[i].Name + ";" + shoppingList[i].Price + ";" + DateTime.Now.ToString());
+                        File.AppendAllText("../../../buyHistory.csv", $"{realusername},{shoppingList[i].Name},{shoppingList[i].Price},{DateTime.Now}\n");
                     }
                 }
+                shoppingList.Clear();
+
                 Console.Clear();
                 Console.WriteLine("Your purchase was successful! Total amount paid: " + totalAmount + "$");
                 continue;
             }
-            else if (userChoice=="5") {
+            else if (userChoice == "5")
+            {
 
                 break;
             }
