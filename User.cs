@@ -28,8 +28,6 @@ public class User
     // Function for registering a new user
     public bool RegisterUser()
     {
-        
-
         string? passwordinput;
         while (true)
         {
@@ -65,7 +63,6 @@ public class User
         }
         return true;
     }
-
     // Dictionary csv for user login and password
     public User()
     {
@@ -86,8 +83,6 @@ public class User
     // Login function for user
     public bool Login()
     {
-        
-
         while (true)
         {
             Console.Clear();
@@ -165,7 +160,8 @@ public class User
                 Console.WriteLine("Your purchase was successful! Total amount paid: " + totalAmount + "$");
                 continue;
             }
-            else if (userChoice=="5") {
+            else if (userChoice == "5")
+            {
 
                 break;
             }
