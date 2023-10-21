@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using System.Formats.Asn1;
 using System.Globalization;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.VisualBasic;
 
 namespace Webshop;
 
@@ -63,7 +64,7 @@ public class Admin
             if (menuselection == "1")
             {
                 ProductMenu();
-                break;
+
             }
             else if (menuselection == "2")
             {
@@ -221,7 +222,10 @@ public class Admin
                 string name = product.Name;
                 Products.RegisterProduct(product);
                 Console.WriteLine("Product added successfully.");
+                Console.WriteLine("Enter to continue");
+                Console.ReadLine();
                 break;
+
             }
         }
 
@@ -244,8 +248,15 @@ public class Admin
             }
             if (menuselection == "2")
             {
-                Console.WriteLine("Display Productlist."); //code missing display updated product list
+                for (int i = 0; i < Products.productList.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {Products.productList[i].Name} - {Products.productList[i].Price} SEK");
+                }
+                Console.WriteLine("Enter to continue");
+                Console.ReadLine();
+
                 break;
+
             }
             if (menuselection == "m")
             {
@@ -287,6 +298,7 @@ public class Admin
                 string id = Console.ReadLine();
                 if (id.Length == 0)
                 {
+
                     Console.WriteLine("You have successfully failed to enter a product number.");
                     continue;
                 }
@@ -414,12 +426,12 @@ public class Admin
 
             if (user.loginlistUser.ContainsKey(userToEdit))
             {
-                    Console.WriteLine("Enter new password");
-                    string? password = Console.ReadLine();
-                    user.loginlistUser[userToEdit] = password;
-                    string csvContent = string.Join(Environment.NewLine, user.loginlistUser.Select(entry => $"{entry.Key},{entry.Value}"));
-                    // Write the content to the file, replacing any existing content
-                    File.WriteAllText("../../../users.csv", csvContent);
+                Console.WriteLine("Enter new password");
+                string? password = Console.ReadLine();
+                user.loginlistUser[userToEdit] = password;
+                string csvContent = string.Join(Environment.NewLine, user.loginlistUser.Select(entry => $"{entry.Key},{entry.Value}"));
+                // Write the content to the file, replacing any existing content
+                File.WriteAllText("../../../users.csv", csvContent);
                 break;
             }
             else
@@ -473,10 +485,17 @@ public class Admin
         {
             Console.Clear();
             Console.WriteLine("Order and transaction history");
-            string[] lines = File.ReadAllLines("../../../buyHistory.csv");
-            foreach (string line in lines)
+            string[] filen = File.ReadAllLines("../../../buyHistory.csv");
+
+            foreach (string line in filen)
             {
-                Console.WriteLine(line); //displays purchase history
+                filen = line.Split(',');
+                string username = filen[0];
+                string item = filen[1];
+                string price = filen[2];
+                string dateAndTime = filen[3];
+                Console.WriteLine("User: " + username + " bought " + item + " for " + price + " sek " + " at " + dateAndTime);
+
             }
 
             Console.WriteLine("What would your like to do next?");

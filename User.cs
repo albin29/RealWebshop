@@ -126,6 +126,7 @@ public class User
                 Console.Clear();
                 Console.WriteLine(realusername + " Buyhistory:\n");
                 history.ViewBuyHistory(realusername);
+                Console.WriteLine("Press enter to proceed");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -137,6 +138,7 @@ public class User
                 {
                     Console.WriteLine(shoppingList[i].Name + " " + shoppingList[i].Price);
                 }
+                Console.WriteLine("Press enter to proceed");
                 Console.ReadKey();
                 Console.Clear();
             }
