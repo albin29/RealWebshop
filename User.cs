@@ -28,14 +28,10 @@ public class User
     // Function for registering a new user
     public bool RegisterUser()
     {
-
         string? passwordinput;
         while (true)
         {
-            Console.Clear();
-
-            Console.Write("Please enter a unique username of your choice: ");
-
+            Console.WriteLine("Please enter your username");
             string userinputname = Console.ReadLine();
             if (UsernameExists(userinputname))
             {
@@ -45,31 +41,24 @@ public class User
             }
             while (true)
             {
-                Console.WriteLine(); 
-                Console.Write("Please choose a password: ");
+                Console.WriteLine("Please enter your password");
                 passwordinput = Console.ReadLine();
 
                 if (passwordinput == "")
                 {
-                    Console.WriteLine("No empty password allowed");
+                    Console.WriteLine("No empty password");
                     continue;
                 }
                 break;
             }
-            Console.Clear();
-
-            Console.WriteLine(userinputname + ", has sucessfully been registered as a new customer!\n");
-
+            Console.WriteLine(userinputname + " Sucessfully created new user");
             loginlistUser.Add(userinputname, passwordinput);
             // Adds the user to the CSV file
-            //(CHANGE) deleted the streamwriter that Manuel doesnt like AND also changed ; seperator to , seperator
-
             File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}\n");
             break;
         }
         return true;
     }
-
     // Dictionary csv for user login and password
     public User()
     {
@@ -81,6 +70,7 @@ public class User
             {
                 continue;
             }
+            
             filen = line.Split(',');
             string name2 = filen[0];
             string password2 = filen[1];
@@ -93,11 +83,10 @@ public class User
         while (true)
         {
             Console.Clear();
-            Console.Write("Please enter your username: ");
-            string? userinputname = Console.ReadLine();
-            Console.WriteLine();
-            Console.Write("Please enter your password: ");
-            string? passwordinput = Console.ReadLine();
+            Console.WriteLine("Please enter your username");
+            string userinputname = Console.ReadLine();
+            Console.WriteLine("Please enter your password");
+            string passwordinput = Console.ReadLine();
             if (loginlistUser.ContainsKey(userinputname) && passwordinput == loginlistUser[userinputname])
             {
                 realusername = userinputname;
@@ -108,8 +97,8 @@ public class User
             }
             else
             {
-                Console.WriteLine("Your credentials do not exist.");
-                Console.WriteLine("Please try again!");
+                Console.WriteLine("Your credentials do not exist");
+                Console.WriteLine("Please try again");
                 Console.ReadKey();
             }
         }
@@ -120,12 +109,12 @@ public class User
     {
         while (true)
         {
-            Console.WriteLine("What do you want to do?\n");
-            Console.WriteLine("1 - to make a purchase");
-            Console.WriteLine("2 - to view  your purchase history");
-            Console.WriteLine("3 - to view your cart");
-            Console.WriteLine("4 - to checkout");
-            Console.WriteLine("x - to exit\n");
+            Console.WriteLine("What do you want to do?");
+            Console.WriteLine("1 / Buy items");
+            Console.WriteLine("2 / View purchase history");
+            Console.WriteLine("3 / View cart");
+            Console.WriteLine("4 / Checkout");
+            Console.WriteLine("5 / Exit");
             string userChoice = Console.ReadLine();
             if (userChoice == "1")
             {
@@ -136,9 +125,8 @@ public class User
             {
                 Console.Clear();
                 Console.WriteLine(realusername + " Buyhistory:\n");
-
                 history.ViewBuyHistory(realusername);
-
+                Console.WriteLine("Press enter to proceed");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -150,29 +138,30 @@ public class User
                 {
                     Console.WriteLine(shoppingList[i].Name + " " + shoppingList[i].Price);
                 }
+                Console.WriteLine("Press enter to proceed");
                 Console.ReadKey();
                 Console.Clear();
             }
-            else if (userChoice == "4")// (CHANGE) added , instead of ; seperator and removed streamwriter + mad sure cart is empty after purchase
+            else if (userChoice == "4")
             {
+
                 float totalAmount = 0;
+                using (StreamWriter sw = File.AppendText("../../../buyHistory.csv"))
                 {
                     for (int i = 0; i < shoppingList.Count; i++)
                     {
                         totalAmount += shoppingList[i].Price;
-                        File.AppendAllText("../../../buyHistory.csv", $"{realusername},{shoppingList[i].Name},{shoppingList[i].Price},{DateTime.Now}\n");
+                        sw.WriteLine(realusername + "," + shoppingList[i].Name + "," + shoppingList[i].Price + "," + DateTime.Now.ToString());
                     }
+
                 }
                 shoppingList.Clear();
-
                 Console.Clear();
                 Console.WriteLine("Your purchase was successful! Total amount paid: " + totalAmount + "$");
                 continue;
             }
-
-            else if (userChoice=="x") {
-
-
+            else if (userChoice == "5")
+            {
                 break;
             }
             else

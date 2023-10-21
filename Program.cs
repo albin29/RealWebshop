@@ -7,13 +7,8 @@ public class Program
 
     public static void Main(string[] args)
     {
-        
-        // Gets admin and user functions to use in main
-        //Admin admin = new Admin();
         User user = new User();
-        Admin admin = new Admin();
-      //  user.Init();
-
+        Admin admin = new Admin(user);
         while (true)
         {
             Console.Clear();

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace Webshop;
 
 public record Product(
-
-    float Price,
-    string Name
+     float Price,
+     string Name
 );
 public static class Products
 {
@@ -18,6 +17,7 @@ public static class Products
     {
         ReadProducts();
     }
+  
     public static void RegisterProduct(Product product)
     {
         productList.Add(product);
@@ -28,17 +28,14 @@ public static class Products
         productList.Remove(product);
         WriteProducts();
     }
-
     public static void WriteProducts()
-
     {
         string lines = "";
         foreach (var product in productList)
         {
-            lines += product.Name + "," + product.Price + "\n";
+            lines += product.Name + ";" + product.Price + "\n";
         }
         File.WriteAllText("../../../products.csv", lines);
-        
     }
     public static void ReadProducts()
     {
@@ -51,7 +48,7 @@ public static class Products
             {
                 continue;
             }
-            filen = line.Split(',');
+            filen = line.Split(';');
             productname = filen[0];
             string productprice = filen[1];
             productList.Add(new Product
@@ -61,7 +58,6 @@ public static class Products
             ));
         }
     }
-
     public static void ShopItems(List<Product> shoppinglist)
     {
         while (true)

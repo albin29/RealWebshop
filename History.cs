@@ -14,13 +14,13 @@ public class History
 
         foreach (string line in filen)
         {
-            filen = line.Split(';');
+            filen = line.Split(',');
             string username = filen[0];
             string item = filen[1];
             string price = filen[2];
             string dateAndTime = filen[3];
 
-            Console.WriteLine($"User: {username}; Purchased item: {item}; Price price: {price}$; Date: {dateAndTime}");
+            Console.WriteLine("User: " + username + " bought " + item + " for " + price + " sek " + " at " + dateAndTime);
 
         }
     }
@@ -34,7 +34,6 @@ public class History
             {
                 continue;
             }
-
             filen = line.Split(',');
             string itemname = filen[0];
             string item = filen[1];
@@ -43,7 +42,7 @@ public class History
 
             if (name == itemname)
             {
-                Console.WriteLine($"{item}, {price}$ | {dateAndTime}");
+                Console.WriteLine(item + " " + price + " " + dateAndTime);
             }
         }
     }
