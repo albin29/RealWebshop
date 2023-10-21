@@ -30,7 +30,7 @@ public class Admin
     }
     public void AdminMenu()
     {
-        Console.WriteLine("Admin Login");
+        Console.WriteLine("\nAdmin Login\n");
         while (true)
         {
             Console.Write("Please enter your admin password: ");
@@ -193,7 +193,6 @@ public class Admin
 
         Console.Clear();
         Console.WriteLine("Add a new product\n");
-        Console.WriteLine("Product List"); //Productlist display
         Console.Write("Please enter a unique product name: ");
         string? productName = Console.ReadLine();
         while (true)
@@ -229,7 +228,7 @@ public class Admin
             Console.WriteLine("1 - to add another product.");
             Console.WriteLine("2 - to view product list.");
             Console.WriteLine("m - to go back to your main menu.");
-            Console.WriteLine("x - to log out.\");
+            Console.WriteLine("x - to log out.\n");
             Console.Write("Please navigate by enterning the preceding character: ");
             string? menuselection = Console.ReadLine();
 
@@ -472,7 +471,7 @@ public class Admin
             Console.WriteLine("Order and transaction history");
 
             History history = new History();
-            history.ViewAllBuyHistory();
+            history.viewAllBuyHistory();
             
             Console.WriteLine("What would your like to do next?\n");
             Console.WriteLine("m - to go back to your main menu.");
