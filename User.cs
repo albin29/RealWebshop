@@ -31,17 +31,19 @@ public class User
         string? passwordinput;
         while (true)
         {
-            Console.WriteLine("Please enter your username");
+            Console.Clear();
+            Console.WriteLine("Register as a new user\n");
+            Console.Write("Please enter a username of your choice: ");
             string userinputname = Console.ReadLine();
             if (UsernameExists(userinputname))
             {
                 Console.Clear();
-                Console.WriteLine("Username already exists");
+                Console.WriteLine("Username already exists.");
                 continue;
             }
             while (true)
             {
-                Console.WriteLine("Please enter your password");
+                Console.Write("\nPlease choose a password: ");
                 passwordinput = Console.ReadLine();
 
                 if (passwordinput == "")
@@ -51,7 +53,8 @@ public class User
                 }
                 break;
             }
-            Console.WriteLine(userinputname + " Sucessfully created new user");
+            Console.Clear();
+            Console.WriteLine(userinputname + " has sucessfully been registered as a new user.\n");
             loginlistUser.Add(userinputname, passwordinput);
             // Adds the user to the CSV file
             File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}\n");
@@ -83,9 +86,9 @@ public class User
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Please enter your username");
+            Console.Write("Please enter your username: ");
             string userinputname = Console.ReadLine();
-            Console.WriteLine("Please enter your password");
+            Console.Write("\nPlease enter your password: ");
             string passwordinput = Console.ReadLine();
             if (loginlistUser.ContainsKey(userinputname) && passwordinput == loginlistUser[userinputname])
             {
