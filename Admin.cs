@@ -39,7 +39,6 @@ public class Admin
             if (enteredpassword == adminpassword)
             {
                 AdminMainMenu();
-                break;
             }
             else
             {
@@ -53,37 +52,34 @@ public class Admin
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Hello, Admin! What would you like to do?");
+            Console.WriteLine("Hello, Admin! What would you like to do?\n");
             Console.WriteLine("1 - to manage products.");
             Console.WriteLine("2 - to manage users.");
             Console.WriteLine("3 - to view order and transaction history.");
-            Console.WriteLine("x - to log out.");
+            Console.WriteLine("x - to log out.\n");
             Console.Write("Please navigate by entering the preceding character: ");
             string? menuselection = Console.ReadLine();
 
             if (menuselection == "1")
             {
                 ProductMenu();
-
             }
             else if (menuselection == "2")
             {
                 UserMenu();
-                break;
             }
             else if (menuselection == "3")
             {
                 DisplayBuyHistory();
-                break;
             }
             else if (menuselection == "x")
             {
-                break;
+                AdminMenu();
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry.\n");
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
                 continue;
@@ -95,43 +91,39 @@ public class Admin
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Manage products");
+            Console.WriteLine("Manage products\n");
             Console.WriteLine("1 - to add a new product.");
             Console.WriteLine("2 - to edit an existing product.");
             Console.WriteLine("3 - to delete a product.");
             Console.WriteLine("m - to go back to your main menu.");
-            Console.WriteLine("x - to log out.");
+            Console.WriteLine("x - to log out.\n");
             Console.Write("Please navigate by entering the proceeding character: ");
             string? menuselection = Console.ReadLine();
             if (menuselection == "1")
             {
                 AddProduct();
-                break;
             }
             else if (menuselection == "2")
             {
                 EditProduct();
-                break;
             }
 
             else if (menuselection == "3")
             {
                 DeleteProduct();
-                break;
             }
             else if (menuselection == "m")
             {
                 AdminMainMenu();
-                break;
             }
             else if (menuselection == "x")
             {
-                break;
+                AdminMenu();
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry.\n");
 
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
@@ -144,11 +136,11 @@ public class Admin
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Edit Product");
-            Console.WriteLine("Current Products:");
+            Console.WriteLine("Edit Product\n");
+            
             for (int i = 0; i < Products.productList.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {Products.productList[i].Name} - {Products.productList[i].Price} SEK");
+                Console.WriteLine($"{i + 1}. {Products.productList[i].Name} - {Products.productList[i].Price} $");
             }
             Console.WriteLine("\nWhich product would you like to edit (enter the product number or 0 to go back to the menu)?");
             string userChoice = Console.ReadLine();
@@ -172,7 +164,7 @@ public class Admin
                     Products.productList[index] = new Product(newPrice, Products.productList[index].Name);
                     Products.WriteProducts(); // Save the updated product list to the CSV file
                     Console.Clear();
-                    Console.WriteLine("Product price updated successfully!");
+                    Console.WriteLine("Product price updated successfully!\n");
                     Console.WriteLine("Press any key to continue.");
                     Console.ReadKey();
                     Console.Clear();
@@ -181,7 +173,7 @@ public class Admin
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("Invalid price. Please enter a valid price.");
+                    Console.WriteLine("Invalid price. Please enter a valid price.\n");
                     Console.WriteLine("Press any key to try again.");
                     Console.ReadKey();
                 }
@@ -189,7 +181,7 @@ public class Admin
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry. Please enter a valid product number.");
+                Console.WriteLine("Invalid entry. Please enter a valid product number.\n");
                 Console.WriteLine("Press any key to try again.");
                 Console.ReadKey();
             }
@@ -200,13 +192,13 @@ public class Admin
     {
 
         Console.Clear();
-        Console.WriteLine("Add a new product");
+        Console.WriteLine("Add a new product\n");
         Console.WriteLine("Product List"); //Productlist display
         Console.Write("Please enter a unique product name: ");
         string? productName = Console.ReadLine();
         while (true)
         {
-            Console.WriteLine("Please enter a product price in Decimals with comma or whole numbers per unit: ");
+            Console.Write("Please enter a product price in Decimals with comma or whole numbers per unit: ");
             string? productPriceInput = Console.ReadLine();
 
             if (!float.TryParse(productPriceInput, out float productPrice))
@@ -221,7 +213,7 @@ public class Admin
                 float price = product.Price;
                 string name = product.Name;
                 Products.RegisterProduct(product);
-                Console.WriteLine("Product added successfully.");
+                Console.WriteLine("Product added successfully.\n");
                 Console.WriteLine("Enter to continue");
                 Console.ReadLine();
                 break;
@@ -232,13 +224,13 @@ public class Admin
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("You successfully added products");
+            Console.WriteLine("You successfully added products.\n");
             Console.WriteLine("What would you like to do next?");
             Console.WriteLine("1 - to add another product.");
             Console.WriteLine("2 - to view product list.");
             Console.WriteLine("m - to go back to your main menu.");
-            Console.WriteLine("x - to log out.");
-            Console.Write("Please navigate by entering the preceding character: ");
+            Console.WriteLine("x - to log out.\");
+            Console.Write("Please navigate by enterning the preceding character: ");
             string? menuselection = Console.ReadLine();
 
             if (menuselection == "1")
@@ -250,7 +242,7 @@ public class Admin
             {
                 for (int i = 0; i < Products.productList.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {Products.productList[i].Name} - {Products.productList[i].Price} SEK");
+                    Console.WriteLine($"{i + 1}. {Products.productList[i].Name} - {Products.productList[i].Price} $");
                 }
                 Console.WriteLine("Enter to continue");
                 Console.ReadLine();
@@ -261,16 +253,15 @@ public class Admin
             if (menuselection == "m")
             {
                 AdminMainMenu();
-                break;
             }
             if (menuselection == "x")
             {
-                break; // AdminMenu();
+                AdminMenu();
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry.\n");
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
                 continue;
@@ -284,8 +275,8 @@ public class Admin
         {
             while (true)
             {
-                Console.WriteLine("You are deleting a product.");
-                Console.WriteLine("Here's a list of all products.");
+                Console.WriteLine("Delete products\n");
+                Console.WriteLine("Products:");
 
                 int n = 0;
                 foreach (var product in Products.productList)
@@ -323,12 +314,12 @@ public class Admin
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Manage users");
+            Console.WriteLine("Manage users\n");
             Console.WriteLine("1 - to add a new user.");
             Console.WriteLine("2 - to edit an existing user.");
             Console.WriteLine("3 - to delete a user.");
             Console.WriteLine("M - to go back to your main menu.");
-            Console.WriteLine("X - to log out.");
+            Console.WriteLine("X - to log out.\n");
             Console.Write("Please navigate by entering the preceding character: ");
             string? menuselection = Console.ReadLine();
 
@@ -337,7 +328,6 @@ public class Admin
 
                 AddUser();
 
-                break;
             }
 
             if (menuselection == "2")
@@ -345,15 +335,12 @@ public class Admin
 
                 EditUser();
 
-                break;
             }
 
             if (menuselection == "3")
             {
 
                 DeleteUser();
-
-                break;
             }
 
             else if (menuselection == "m")
@@ -361,17 +348,16 @@ public class Admin
 
                 AdminMainMenu();
 
-                break;
             }
 
             else if (menuselection == "x")
             {
-                break;
+                AdminMenu();
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry.\n");
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
                 continue;
@@ -383,15 +369,14 @@ public class Admin
         user.RegisterUser(); // Accessing the public method
         while (true)
         {
-            Console.WriteLine("What would your like to do next?");
+            Console.WriteLine("What would your like to do next?\n");
             Console.WriteLine("m - to go back to your main menu.");
-            Console.WriteLine("x - to log out.");
+            Console.WriteLine("x - to log out.\n");
             Console.Write("Please navigate by entering the preceding character: ");
             string? menuselection = Console.ReadLine();
             if (menuselection == "m")
             {
                 AdminMainMenu();
-                break;
             }
 
             else if (menuselection == "x")
@@ -401,7 +386,7 @@ public class Admin
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry.\n");
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
                 continue;
@@ -413,14 +398,14 @@ public class Admin
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Edit User");
+            Console.WriteLine("Edit User\n");
             string[] lines = File.ReadAllLines("../../../users.csv");
 
             foreach (string line in lines)
             {
                 Console.WriteLine(line); //displays user list
             }
-            Console.WriteLine("Which user would you like to edit?");
+            Console.WriteLine("Which user would you like to edit?\n");
             Console.Write("Please type in the user name: ");
             string? userToEdit = Console.ReadLine();
 
@@ -449,14 +434,14 @@ public class Admin
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Delete User");
+            Console.WriteLine("Delete user\n");
             string[] lines = File.ReadAllLines("../../../users.csv");
 
             foreach (string line in lines)
             {
                 Console.WriteLine(line); //displays user list
             }
-            Console.WriteLine("Which user would you like to delete?");
+            Console.WriteLine("Which user would you like to delete?\n");
 
             Console.Write("Please type in the user name: ");
             string? userToEdit = Console.ReadLine();
@@ -472,7 +457,7 @@ public class Admin
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry.\n");
                 Console.WriteLine("Press any key to try again! Make sure to use correct spelling.");
                 string? anykey = Console.ReadLine();
                 continue;
@@ -485,38 +470,28 @@ public class Admin
         {
             Console.Clear();
             Console.WriteLine("Order and transaction history");
-            string[] filen = File.ReadAllLines("../../../buyHistory.csv");
 
-            foreach (string line in filen)
-            {
-                filen = line.Split(',');
-                string username = filen[0];
-                string item = filen[1];
-                string price = filen[2];
-                string dateAndTime = filen[3];
-                Console.WriteLine("User: " + username + " bought " + item + " for " + price + " sek " + " at " + dateAndTime);
-
-            }
-
-            Console.WriteLine("What would your like to do next?");
-            Console.WriteLine("M - to go back to your main menu.");
-            Console.WriteLine("X - to log out.");
+            History history = new History();
+            history.ViewAllBuyHistory();
+            
+            Console.WriteLine("What would your like to do next?\n");
+            Console.WriteLine("m - to go back to your main menu.");
+            Console.WriteLine("x - to log out.\n");
             Console.Write("Please navigate by entering the preceding character: ");
             string? menuselection = Console.ReadLine();
             if (menuselection == "m")
             {
                 AdminMainMenu();
-                break;
             }
 
             else if (menuselection == "x")
             {
-                break;
+                AdminMenu();
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry.\n");
                 Console.WriteLine("Press any key to try again!");
                 string? anykey = Console.ReadLine();
                 continue;
