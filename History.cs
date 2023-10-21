@@ -10,39 +10,39 @@ public class History
 {
     public void viewAllBuyHistory()
     {
-        string[] filen = File.ReadAllLines("../../../buyHistory.csv");
+        string[] lines = File.ReadAllLines("../../../buyHistory.csv");
 
-        foreach (string line in filen)
+        foreach (string line in lines)
         {
-            filen = line.Split(',');
-            string username = filen[0];
-            string item = filen[1];
-            string price = filen[2];
-            string dateAndTime = filen[3];
+            lines = line.Split(',');
+            string username = lines[0];
+            string item = lines[1];
+            string price = lines[2];
+            string dateAndTime = lines[3];
 
-            Console.WriteLine("User: " + username + " bought " + item + " for " + price + " sek " + " at " + dateAndTime);
+            Console.WriteLine($"User: {username}, Product: {item}, Price: {price} $, Date: {dateAndTime}");
 
         }
     }
     public void ViewBuyHistory(string name)
     {
-        string[] filen = File.ReadAllLines("../../../buyHistory.csv");
+        string[] lines = File.ReadAllLines("../../../buyHistory.csv");
 
-        foreach (string line in filen)
+        foreach (string line in lines)
         {
             if (line == "")
             {
                 continue;
             }
             filen = line.Split(',');
-            string itemname = filen[0];
-            string item = filen[1];
-            string price = filen[2];
-            string dateAndTime = filen[3];
+            string itemname = lines[0];
+            string item = lines[1];
+            string price = lines[2];
+            string dateAndTime = lines[3];
 
-            if (name == itemname)
+            if (name == itemname) //why "itemname" - not username/customer?
             {
-                Console.WriteLine(item + " " + price + " " + dateAndTime);
+                Console.WriteLine($"Product: {item}, Price: {price} $, Date: {dateAndTime}");
             }
         }
     }
