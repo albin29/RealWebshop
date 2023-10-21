@@ -5,17 +5,19 @@ namespace Webshop;
 public class Program
 {
 
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         User user = new User();
         Admin admin = new Admin(user);
         while (true)
         {
-            Console.WriteLine("Welcome to the store system!");
-            Console.WriteLine("1. Log in as Admin");
-            Console.WriteLine("2. Log in as Customer");
-            Console.WriteLine("3. Register New Customer");
-            Console.WriteLine("4. Exit");
+            Console.Clear();
+            Console.WriteLine("Welcome to the store system!\n");
+            Console.WriteLine("1 - to log in as admin");
+            Console.WriteLine("2 - to log in as a customer");
+            Console.WriteLine("3 - to register as a new customer");
+            Console.WriteLine("x - to exit\n");
+            Console.Write("Please navigate by entering the preceding character: ");
 
             string? choice = (Console.ReadLine());
 
@@ -35,7 +37,7 @@ public class Program
                 user.RegisterUser();
                 continue;
             }
-            else if (choice == "4")
+            else if (choice == "x")
             {
                 break;
             }
