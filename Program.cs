@@ -17,7 +17,7 @@ public class Program
             Console.WriteLine("2 - to log in as a customer");
             Console.WriteLine("3 - to register as a new customer");
             Console.WriteLine("x - to exit\n");
-            Console.Write("Please navigate by entering the preceding character: ");
+            Console.Write("Please navigate by entering the respective character: ");
 
             string? choice = (Console.ReadLine());
 

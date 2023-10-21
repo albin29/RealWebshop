@@ -190,11 +190,14 @@ public class Admin
             }
             if (menuselection == "2")
             {
+                Console.Clear();
                 Console.WriteLine("Products:\n");
-                for (int i = 0; i < Products.productList.Count; i++)
+
+                DisplayProductlist();
+                /* (int i = 0; i < Products.productList.Count; i++)
                 {
                     Console.WriteLine($"{i + 1}. {Products.productList[i].Name} - {Products.productList[i].Price} $");
-                }
+                }*/
                 Console.WriteLine("\nEnter to continue.");
                 Console.ReadLine();
 
@@ -220,19 +223,24 @@ public class Admin
 
         }
     }
+    public void DisplayProductlist()
+    {
+        for (int i = 0; i < Products.productList.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {Products.productList[i].Name} - {Products.productList[i].Price} $");
+        }
+    }
     public void EditProduct()
     {
         while (true)
         {
             Console.Clear();
             Console.WriteLine("Edit Product\n");
-            
-            for (int i = 0; i < Products.productList.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {Products.productList[i].Name} - {Products.productList[i].Price} $");
-            }
+
+            DisplayProductlist(); //View Productlist
+
             Console.WriteLine("\nWhich product would you like to edit?\n");
-            Console.Write("Please enter the product number or 0 to go back:");
+            Console.Write("Please enter the product number or '0' to go back: ");
 
             string userChoice = Console.ReadLine();
 
@@ -246,8 +254,8 @@ public class Admin
                 Console.Clear();
                 int index = productNumber - 1; // Adjust for 0-based indexing
 
-                Console.WriteLine($"You selected: {Products.productList[index].Name}");
-                Console.Write("Enter the new price: ");
+                Console.WriteLine($"You selected: '{Products.productList[index].Name}'");
+                Console.Write("\nPlease enter new price: ");
 
                 if (float.TryParse(Console.ReadLine(), out float newPrice))
                 {
@@ -284,17 +292,14 @@ public class Admin
         {
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("Delete products\n");
-                Console.WriteLine("Products:");
+                Console.WriteLine("Products:\n");
 
-                int n = 0;
-                foreach (var product in Products.productList)
-                {
-                    Console.WriteLine((++n).ToString() + ": " + product.Name + ", " + product.Price);
-                }
+                DisplayProductlist();
 
                 Console.WriteLine("\nWhich product would you like to delete?\n");
-                Console.Write("Please enter the product number or 0 to go back:");
+                Console.Write("Please enter the product number or 0 to go back: ");
                 string id = Console.ReadLine();
                 if (id.Length == 0)
                 {
