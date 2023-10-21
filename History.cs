@@ -34,7 +34,7 @@ public class History
             {
                 continue;
             }
-            filen = line.Split(',');
+            lines = line.Split(',');
             string itemname = lines[0];
             string item = lines[1];
             string price = lines[2];
