@@ -31,17 +31,19 @@ public class User
         string? passwordinput;
         while (true)
         {
-            Console.WriteLine("Please enter your username");
+            Console.Clear();
+            Console.WriteLine("Register as a new user\n");
+            Console.Write("Please enter a username of your choice: ");
             string userinputname = Console.ReadLine();
             if (UsernameExists(userinputname))
             {
                 Console.Clear();
-                Console.WriteLine("Username already exists");
+                Console.WriteLine("Username already exists.");
                 continue;
             }
             while (true)
             {
-                Console.WriteLine("Please enter your password");
+                Console.Write("\nPlease choose a password: ");
                 passwordinput = Console.ReadLine();
 
                 if (passwordinput == "")
@@ -51,7 +53,8 @@ public class User
                 }
                 break;
             }
-            Console.WriteLine(userinputname + " Sucessfully created new user");
+            Console.Clear();
+            Console.WriteLine(userinputname + " has sucessfully been registered as a new user.\n");
             loginlistUser.Add(userinputname, passwordinput);
             // Adds the user to the CSV file
             File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}\n");
@@ -83,9 +86,9 @@ public class User
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Please enter your username");
+            Console.Write("Please enter your username: ");
             string userinputname = Console.ReadLine();
-            Console.WriteLine("Please enter your password");
+            Console.Write("\nPlease enter your password: ");
             string passwordinput = Console.ReadLine();
             if (loginlistUser.ContainsKey(userinputname) && passwordinput == loginlistUser[userinputname])
             {
@@ -97,7 +100,7 @@ public class User
             }
             else
             {
-                Console.WriteLine("Your credentials do not exist");
+                Console.WriteLine("\nIncorrect user or password.\n");
                 Console.WriteLine("Please try again");
                 Console.ReadKey();
             }
@@ -109,12 +112,13 @@ public class User
     {
         while (true)
         {
-            Console.WriteLine("What do you want to do?");
-            Console.WriteLine("1 / Buy items");
-            Console.WriteLine("2 / View purchase history");
-            Console.WriteLine("3 / View cart");
-            Console.WriteLine("4 / Checkout");
-            Console.WriteLine("5 / Exit");
+            Console.WriteLine("What do you want to do?\n");
+            Console.WriteLine("1 - to make a purchase");
+            Console.WriteLine("2 - to view purchase history");
+            Console.WriteLine("3 - to view cart");
+            Console.WriteLine("4 - to checkout");
+            Console.WriteLine("x - to exit\n");
+            Console.Write("Please navigate by entering the respective character: ");
             string userChoice = Console.ReadLine();
             if (userChoice == "1")
             {
@@ -126,7 +130,7 @@ public class User
                 Console.Clear();
                 Console.WriteLine(realusername + " Buyhistory:\n");
                 history.ViewBuyHistory(realusername);
-                Console.WriteLine("Press enter to proceed");
+                Console.WriteLine("Press enter to proceed.");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -138,7 +142,7 @@ public class User
                 {
                     Console.WriteLine(shoppingList[i].Name + " " + shoppingList[i].Price);
                 }
-                Console.WriteLine("Press enter to proceed");
+                Console.WriteLine("Press enter to proceed.");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -160,7 +164,7 @@ public class User
                 Console.WriteLine("Your purchase was successful! Total amount paid: " + totalAmount + "$");
                 continue;
             }
-            else if (userChoice == "5")
+            else if (userChoice == "x")
             {
                 break;
             }

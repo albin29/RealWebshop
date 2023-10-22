@@ -17,7 +17,7 @@ public static class Products
     {
         ReadProducts();
     }
-  
+
     public static void RegisterProduct(Product product)
     {
         productList.Add(product);
@@ -58,7 +58,9 @@ public static class Products
             ));
         }
     }
-    public static void ShopItems(List<Product> shoppinglist)
+
+   
+ public static void ShopItems(List<Product> shoppinglist)
     {
         while (true)
         {
@@ -66,7 +68,7 @@ public static class Products
 
             for (int i = 0; i < productList.Count; i++)
             {
-                Console.WriteLine(productList[i].Name + " kostar" + " " + productList[i].Price + " SEK ");
+                Console.WriteLine(productList[i].Name + " kostar" + " " + productList[i].Price + " $ ");
             }
             Console.WriteLine();
             Console.WriteLine("Press 0 to go back to menu");
