@@ -395,7 +395,7 @@ public class Admin
 
             else if (menuselection == "x")
             {
-                break;
+                AdminMenu();
             }
             else
             {
