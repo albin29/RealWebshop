@@ -283,7 +283,7 @@ public class Admin
                     Console.WriteLine((++n).ToString() + ": " + product.Name + ", " + product.Price);
                 }
 
-                Console.WriteLine("Enter a product's number to remove that product.");
+                Console.WriteLine("\nEnter a product's number to remove that product.");
                 Console.WriteLine("Enter 0 to exit this mode.");
                 string id = Console.ReadLine();
                 if (id.Length == 0)
