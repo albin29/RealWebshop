@@ -57,7 +57,7 @@ public class User
             Console.WriteLine(userinputname + " has sucessfully been registered as a new user.\n");
             loginlistUser.Add(userinputname, passwordinput);
             // Adds the user to the CSV file
-            File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}\n");
+            File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}");
             break;
         }
         return true;
