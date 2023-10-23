@@ -4,7 +4,6 @@ using System.Security.Cryptography.X509Certificates;
 namespace Webshop;
 public class Program
 {
-
     public static void Main(string[] args)
     {
         User user = new User();
