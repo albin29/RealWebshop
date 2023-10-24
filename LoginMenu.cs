@@ -49,10 +49,8 @@ public class LoginMenu
             string existingUsername = part[0];
             string existingPassword = part[1];
 
-
             if (username == existingUsername)
             {
-                
                 Console.WriteLine("Please enter your password");
                 string? password = Console.ReadLine();
 
@@ -64,7 +62,7 @@ public class LoginMenu
                         switch (role)
                         {
                             case Role.Customer:
-                                return new Customer(username);
+                                return new Customer(username, LoadCart(username));
 
                             case Role.Admin:
                                 return new Admin(username);
@@ -81,5 +79,16 @@ public class LoginMenu
             }
         }
         return null;
+    }
+    private static List<Product> LoadCart(string user)
+    {
+        List<Product> cart = new List<Product>();
+        string[] savedCart = File.ReadAllLines($"carts/{user}.csv");
+
+        foreach (string item in savedCart)
+        {
+            cart.Add(new Product(user));
+        }
+        return cart;
     }
 }
