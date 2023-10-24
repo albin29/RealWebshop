@@ -64,11 +64,11 @@ public static class Products
     {
         while (true)
         {
-            Console.WriteLine("What would you like to buy? \n");
+            Console.WriteLine("What would you like to put in your cart? \n");
 
             for (int i = 0; i < productList.Count; i++)
             {
-                Console.WriteLine(productList[i].Name + " kostar" + " " + productList[i].Price + " $ ");
+                Console.WriteLine(productList[i].Name + " costs " + productList[i].Price + "$ ");
             }
             Console.WriteLine();
             Console.WriteLine("Press 0 to go back to menu");
