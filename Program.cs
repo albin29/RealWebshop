@@ -12,11 +12,10 @@ public class Program
         {
             Console.Clear();
             Console.WriteLine("Welcome to the store system!\n");
-            Console.WriteLine("1 - to log in as admin");
-            Console.WriteLine("2 - to log in as a customer");
-            Console.WriteLine("3 - to register as a new customer");
-            Console.WriteLine("x - to exit\n");
-            Console.Write("Please navigate by entering the respective character: ");
+            Console.WriteLine("1 - Log in as admin");
+            Console.WriteLine("2 - Log in as a customer");
+            Console.WriteLine("3 - Register as a new customer\n");
+            Console.WriteLine("0 - Exit\n");
 
             string? choice = (Console.ReadLine());
 
@@ -27,7 +26,6 @@ public class Program
             }
             else if (choice == "2")
             {
-
                 user.Login();
                 continue;
             }
@@ -36,7 +34,7 @@ public class Program
                 user.RegisterUser();
                 continue;
             }
-            else if (choice == "x")
+            else if (choice == "0")
             {
                 break;
             }

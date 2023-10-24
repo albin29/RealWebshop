@@ -33,8 +33,12 @@ public class User
         {
             Console.Clear();
             Console.WriteLine("Register as a new user\n");
-            Console.Write("Please enter a username of your choice: ");
+            Console.Write("Please enter a username of your choice or press 0 to go back:\n");
             string userinputname = Console.ReadLine();
+            if (userinputname == "0")
+            {
+                break;
+            }
             if (UsernameExists(userinputname))
             {
                 Console.Clear();
@@ -57,7 +61,7 @@ public class User
             Console.WriteLine(userinputname + " has sucessfully been registered as a new user.\n");
             loginlistUser.Add(userinputname, passwordinput);
             // Adds the user to the CSV file
-            File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}");
+            File.AppendAllText("../../../users.csv", $"{userinputname},{passwordinput}\n");
             break;
         }
         return true;
@@ -73,7 +77,7 @@ public class User
             {
                 continue;
             }
-            
+
             filen = line.Split(',');
             string name2 = filen[0];
             string password2 = filen[1];
@@ -113,11 +117,11 @@ public class User
         while (true)
         {
             Console.WriteLine("What do you want to do?\n");
-            Console.WriteLine("1 - to make a purchase");
-            Console.WriteLine("2 - to view purchase history");
-            Console.WriteLine("3 - to view cart");
-            Console.WriteLine("4 - to checkout");
-            Console.WriteLine("x - to exit\n");
+            Console.WriteLine("1 - Fill cart");
+            Console.WriteLine("2 - View purchase history");
+            Console.WriteLine("3 - View cart");
+            Console.WriteLine("4 - Checkout\n");
+            Console.WriteLine("0 - Go back\n");
             Console.Write("Please navigate by entering the respective character: ");
             string userChoice = Console.ReadLine();
             if (userChoice == "1")
@@ -130,7 +134,7 @@ public class User
                 Console.Clear();
                 Console.WriteLine(realusername + " Buyhistory:\n");
                 history.ViewBuyHistory(realusername);
-                Console.WriteLine("Press enter to proceed.");
+                Console.WriteLine("\nPress enter to proceed.");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -140,31 +144,37 @@ public class User
                 Console.WriteLine("Cart contains: \n");
                 for (int i = 0; i < shoppingList.Count; i++)
                 {
-                    Console.WriteLine(shoppingList[i].Name + " " + shoppingList[i].Price);
+                    Console.WriteLine($"{shoppingList[i].Name} {shoppingList[i].Price}");
                 }
-                Console.WriteLine("Press enter to proceed.");
+                Console.WriteLine("\nPress enter to proceed.");
                 Console.ReadKey();
                 Console.Clear();
             }
             else if (userChoice == "4")
             {
-
-                float totalAmount = 0;
-                using (StreamWriter sw = File.AppendText("../../../buyHistory.csv"))
+                if (shoppingList.Count < 1)
                 {
-                    for (int i = 0; i < shoppingList.Count; i++)
-                    {
-                        totalAmount += shoppingList[i].Price;
-                        sw.WriteLine(realusername + "," + shoppingList[i].Name + "," + shoppingList[i].Price + "," + DateTime.Now.ToString());
-                    }
-
+                    Console.Clear();
+                    Console.WriteLine("Your cart is empty, please input a product ");
+                    Console.ReadKey();
+                    continue;
                 }
+                float totalAmount = 0;
+                string totalHistory = "";
+                foreach (Product product in shoppingList)
+                {
+                    totalAmount += product.Price;
+                    totalHistory += ($"{realusername},{product.Name},{product.Price},{DateTime.Now}\n");
+                }
+                File.AppendAllText("../../../buyHistory.csv", totalHistory);
                 shoppingList.Clear();
                 Console.Clear();
                 Console.WriteLine("Your purchase was successful! Total amount paid: " + totalAmount + "$");
+                Console.ReadKey();
+                Console.Clear();
                 continue;
             }
-            else if (userChoice == "x")
+            else if (userChoice == "0")
             {
                 break;
             }
