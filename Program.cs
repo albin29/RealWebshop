@@ -25,6 +25,11 @@ public class Program
                 case "2":
                     user = LoginMenu.LoginUser();
                     break;
+                default:
+                    Console.WriteLine("Please enter 1 or 2");
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                    continue;
             }
         } while (user is null);
 

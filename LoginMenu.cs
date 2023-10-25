@@ -4,7 +4,7 @@ public class LoginMenu
 {
     public static Boolean RegisterUser()
     {
-        string[] userCSV = File.ReadAllLines("../../../users.csv");
+        string[] userCSV = File.ReadAllLines("users.csv");
 
         string? username = string.Empty;
 
@@ -21,7 +21,7 @@ public class LoginMenu
                     Console.WriteLine("Sorry, username is taken");
                     Console.ReadKey();
                     Console.Clear();
-                    RegisterUser();
+                    continue;
                 }
             }
         }
@@ -33,12 +33,12 @@ public class LoginMenu
             password = Console.ReadLine();
         }
 
-        File.AppendAllText("../../../users.csv", $"{username},{password},{Role.Customer}\n");
+        File.AppendAllText("users.csv", $"{username},{password},{Role.Customer}\n");
         return true;
     }
     public static IUser? LoginUser()
     {
-        string[] userCSV = File.ReadAllLines("../../../users.csv");
+        string[] userCSV = File.ReadAllLines("users.csv");
         Console.Clear();
         Console.WriteLine("Please enter your username");
 
@@ -69,6 +69,13 @@ public class LoginMenu
                         }
                     }
                 }
+                else
+                {
+                    Console.WriteLine("\nWrong password.. Try again");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    return null;
+                }
             }
             else
             {
@@ -87,7 +94,7 @@ public class LoginMenu
 
         foreach (string item in savedCart)
         {
-            cart.Add(new Product(user));
+            cart.Add(new Product(item));
         }
         return cart;
     }
